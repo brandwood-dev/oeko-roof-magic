@@ -1,29 +1,701 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  ShieldCheck, Award, HardHat, HeartHandshake, Wrench, Sparkles, CloudRain, Home,
+  Star, Phone, ArrowRight, CheckCircle2, ChevronDown, MapPin, Clock,
+} from "lucide-react";
+import {
+  Accordion, AccordionContent, AccordionItem, AccordionTrigger,
+} from "@/components/ui/accordion";
+import heroRoof from "@/assets/hero-roof.jpg";
+import rooferWork from "@/assets/roofer-work.jpg";
+import beforeAfter from "@/assets/before-after.jpg";
+import phenixHouse from "@/assets/phenix-house.jpg";
+
+const LOGO = "https://res.cloudinary.com/dxkxiy900/image/upload/v1772626532/ok_tefpqi.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "OEKO • Rénovation de Toiture en Île-de-France | Spécialiste Phénix, Alskanor, Castor" },
+      { name: "description", content: "Expert rénovation toiture et travaux de couverture en Île-de-France. Spécialiste maisons à ossature métallique Phénix®, Alskanor®, Castor®. Devis gratuit sous 48h. RGE Qualibat." },
+      { property: "og:title", content: "OEKO • Rénovation de Toiture en Île-de-France" },
+      { property: "og:description", content: "Spécialiste maisons à ossature métallique Phénix®, Alskanor®, Castor®. Devis gratuit sous 48h." },
+      { property: "og:type", content: "website" },
     ],
+    links: [{ rel: "canonical", href: "/" }],
   }),
-  component: Index,
+  component: Landing,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Landing() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
+    <div className="min-h-screen bg-background text-foreground font-sans">
+      <Header />
+      <Hero />
+      <TrustStrip />
+      <WhyOeko />
+      <Services />
+      <Expertise />
+      <Steps />
+      <SocialProof />
+      <QuoteForm />
+      <FAQ />
+      <FinalCTA />
+      <Footer />
+      <StickyMobileCTA />
+    </div>
+  );
+}
+
+/* ---------------- HEADER ---------------- */
+function Header() {
+  return (
+    <header className="sticky top-0 z-40 bg-primary/95 backdrop-blur supports-[backdrop-filter]:bg-primary/85">
+      <div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+        <a href="#top" className="flex items-center gap-2">
+          <img src={LOGO} alt="OEKO" width={120} height={36} className="h-9 w-auto" />
+        </a>
+        <div className="hidden md:flex items-center gap-6 text-primary-foreground/90 text-sm font-medium">
+          <a href="#prestations" className="hover:text-accent">Prestations</a>
+          <a href="#expertise" className="hover:text-accent">Expertise</a>
+          <a href="#etapes" className="hover:text-accent">Étapes</a>
+          <a href="#faq" className="hover:text-accent">FAQ</a>
+        </div>
+        <a href="#devis" className="inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-4 py-2 text-sm font-semibold hover:brightness-95 transition">
+          <Phone className="size-4" /> <span className="hidden sm:inline">Devis gratuit</span>
+        </a>
+      </div>
+    </header>
+  );
+}
+
+/* ---------------- HERO ---------------- */
+function Hero() {
+  return (
+    <section id="top" className="relative overflow-hidden bg-hero-gradient text-primary-foreground">
+      <div className="absolute inset-0 opacity-20 [mask-image:radial-gradient(ellipse_at_top_right,black,transparent_60%)]">
+        <div className="absolute -top-32 -right-24 size-[480px] rounded-full bg-accent/40 blur-3xl" />
+      </div>
+      <div className="relative mx-auto max-w-7xl px-4 pt-10 pb-14 md:pt-20 md:pb-24 grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 ring-1 ring-white/20 px-3 py-1 text-xs font-medium mb-5">
+            <span className="size-2 rounded-full bg-accent" /> 17 ans d'expertise • RGE Qualibat
+          </div>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-[1.05]">
+            Rénovation de Toiture & Travaux de Couverture en{" "}
+            <span className="text-accent">Île-de-France</span>
+            <span className="block text-xl md:text-2xl font-semibold text-primary-foreground/80 mt-3">
+              Spécialiste Maisons à Ossature Métallique
+            </span>
+          </h1>
+          <p className="mt-5 text-base md:text-lg text-primary-foreground/85 max-w-xl">
+            Expert <strong className="text-accent">Phénix®, Alskanor®, Castor®</strong> • Devis gratuit sous 48h • Intervention dans toute l'Île-de-France (77, 78, 91) et départements limitrophes (45, 60, 27, 28, 89, 10).
+          </p>
+          <div className="mt-7 flex flex-col sm:flex-row gap-3">
+            <a href="#devis" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground px-6 py-4 text-base font-bold shadow-soft hover:brightness-95 transition">
+              Obtenir mon devis gratuit <ArrowRight className="size-5" />
+            </a>
+            <a href="tel:+33100000000" className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 ring-1 ring-white/25 px-6 py-4 text-base font-semibold hover:bg-white/15 transition">
+              <Phone className="size-5" /> Nous appeler
+            </a>
+          </div>
+          <div className="mt-6 flex flex-wrap items-center gap-4 text-sm">
+            <div className="flex items-center gap-1.5">
+              {[...Array(5)].map((_, i) => <Star key={i} className="size-4 fill-accent text-accent" />)}
+              <span className="ml-1 font-semibold">4,9/5</span>
+              <span className="text-primary-foreground/70">sur Google</span>
+            </div>
+            <span className="hidden sm:inline text-primary-foreground/30">•</span>
+            <span className="inline-flex items-center gap-1.5 text-primary-foreground/85">
+              <CheckCircle2 className="size-4 text-accent" /> Devis & déplacement gratuit
+            </span>
+          </div>
+        </div>
+        <div className="relative">
+          <div className="relative rounded-3xl overflow-hidden shadow-soft ring-1 ring-white/10">
+            <img src={heroRoof} alt="Toiture rénovée par OEKO" width={1536} height={1024} className="w-full h-[280px] md:h-[460px] object-cover" />
+          </div>
+          <div className="absolute -bottom-5 -left-3 md:-left-6 bg-card text-card-foreground rounded-2xl shadow-card px-4 py-3 flex items-center gap-3">
+            <div className="size-10 rounded-full bg-accent grid place-items-center">
+              <ShieldCheck className="size-5 text-primary" />
+            </div>
+            <div className="text-sm">
+              <div className="font-bold">Garantie Décennale</div>
+              <div className="text-muted-foreground text-xs">Travaux assurés & certifiés</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TrustStrip() {
+  const items = ["Phénix®", "Alskanor®", "Castor®", "RGE Qualibat", "Garantie Décennale", "Devis 48h"];
+  return (
+    <div className="border-y border-border bg-secondary/50">
+      <div className="mx-auto max-w-7xl px-4 py-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-muted-foreground">
+        {items.map((i) => (
+          <span key={i} className="font-semibold text-primary">{i}</span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- WHY ---------------- */
+function WhyOeko() {
+  const cards = [
+    { icon: Award, title: "17 ans d'expertise", desc: "Spécialisation exclusive sur les maisons à ossature métallique depuis 2008." },
+    { icon: Home, title: "Spécialiste Phénix®, Alskanor®, Castor®", desc: "Maîtrise technique des contraintes spécifiques à ces constructions." },
+    { icon: ShieldCheck, title: "RGE Qualibat + Décennale", desc: "Certifications officielles et garanties intégrales sur tous nos travaux." },
+    { icon: HeartHandshake, title: "Accompagnement complet", desc: "Conseil pédagogique de l'étude au suivi post-chantier." },
+  ];
+  return (
+    <section className="py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="max-w-2xl">
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider">Pourquoi OEKO</p>
+          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">Pourquoi choisir OEKO pour votre rénovation de toiture ?</h2>
+          <p className="mt-4 text-muted-foreground">
+            Une expertise rare, des certifications solides, et un accompagnement humain pour des travaux de toiture sans stress.
+          </p>
+        </div>
+        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {cards.map(({ icon: Icon, title, desc }) => (
+            <div key={title} className="group rounded-2xl border border-border bg-card p-6 shadow-card hover:-translate-y-1 hover:border-primary/30 transition">
+              <div className="size-12 rounded-xl bg-primary text-primary-foreground grid place-items-center mb-4 group-hover:bg-accent group-hover:text-accent-foreground transition">
+                <Icon className="size-6" />
+              </div>
+              <h3 className="font-bold text-lg">{title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- SERVICES ---------------- */
+function Services() {
+  const services = [
+    { icon: Home, title: "Rénovation complète", desc: "Réfection totale de toiture, charpente et isolation pour une protection longue durée." },
+    { icon: Wrench, title: "Réparation & Urgence", desc: "Intervention rapide en cas de fuite, tempête ou tuile cassée." },
+    { icon: Sparkles, title: "Nettoyage & Démoussage", desc: "Démoussage, traitement hydrofuge et entretien préventif." },
+    { icon: CloudRain, title: "Gouttières & Zinguerie", desc: "Pose, remplacement et entretien des évacuations d'eau pluviale." },
+  ];
+  return (
+    <section id="prestations" className="py-16 md:py-24 bg-secondary/40">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="max-w-2xl">
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider">Prestations</p>
+          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">Nos Prestations de Rénovation de Toiture et Travaux de Couverture</h2>
+        </div>
+        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {services.map(({ icon: Icon, title, desc }) => (
+            <article key={title} className="rounded-2xl bg-card p-6 shadow-card ring-1 ring-border hover:ring-primary/30 transition">
+              <div className="inline-flex items-center justify-center size-12 rounded-xl bg-accent text-accent-foreground mb-4">
+                <Icon className="size-6" />
+              </div>
+              <h3 className="font-bold text-lg">{title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{desc}</p>
+              <a href="#devis" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:gap-2 transition-all">
+                Demander un devis <ArrowRight className="size-4" />
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- EXPERTISE ---------------- */
+function Expertise() {
+  return (
+    <section id="expertise" className="py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 grid md:grid-cols-2 gap-10 items-center">
+        <div className="relative">
+          <img src={phenixHouse} alt="Maison à ossature métallique Phénix rénovée" width={1024} height={1024} loading="lazy" className="rounded-3xl shadow-soft w-full object-cover aspect-[5/4]" />
+          <div className="absolute -bottom-5 -right-5 bg-primary text-primary-foreground rounded-2xl px-5 py-4 shadow-soft hidden sm:block">
+            <div className="text-3xl font-extrabold text-accent">17 ans</div>
+            <div className="text-xs">d'expertise spécialisée</div>
+          </div>
+        </div>
+        <div>
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider">Expertise unique</p>
+          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">
+            Spécialiste Rénovation Toiture Maisons à Ossature Métallique{" "}
+            <span className="text-primary">Phénix®, Alskanor®, Castor®</span>
+          </h2>
+          <p className="mt-5 text-muted-foreground">
+            Depuis plus de 17 ans, OEKO intervient exclusivement sur les maisons à ossature métallique.
+            Ces constructions, célèbres pour leur structure acier, exigent un savoir-faire technique
+            spécifique : choix de matériaux compatibles, ventilation adaptée, traitement anti-corrosion,
+            et respect des contraintes de portance.
+          </p>
+          <ul className="mt-6 space-y-3">
+            {[
+              "Étude technique préalable systématique",
+              "Matériaux compatibles avec la structure métallique",
+              "Traitement anti-condensation & ventilation optimisée",
+              "Conformité aux normes constructeurs d'origine",
+            ].map((t) => (
+              <li key={t} className="flex items-start gap-3">
+                <CheckCircle2 className="size-5 text-primary shrink-0 mt-0.5" />
+                <span className="text-sm">{t}</span>
+              </li>
+            ))}
+          </ul>
+          <a href="#devis" className="mt-7 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 font-semibold hover:bg-primary-deep transition">
+            Étudier mon projet <ArrowRight className="size-4" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- STEPS ---------------- */
+function Steps() {
+  const steps = [
+    { n: "01", title: "Prise de contact", desc: "Échange téléphonique et compréhension de votre projet sous 48h." },
+    { n: "02", title: "Diagnostic & devis", desc: "Visite technique gratuite, diagnostic complet, devis détaillé." },
+    { n: "03", title: "Réalisation", desc: "Chantier propre, sécurisé, mené par nos couvreurs experts." },
+    { n: "04", title: "Réception & garanties", desc: "Contrôle final, remise des garanties décennale et de parfait achèvement." },
+  ];
+  return (
+    <section id="etapes" className="py-16 md:py-24 bg-primary text-primary-foreground">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="max-w-2xl">
+          <p className="text-sm font-semibold text-accent uppercase tracking-wider">Méthode</p>
+          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">Les Étapes d'une Rénovation de Toiture avec OEKO</h2>
+        </div>
+        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {steps.map((s) => (
+            <div key={s.n} className="relative rounded-2xl bg-white/5 ring-1 ring-white/10 p-6 hover:bg-white/10 transition">
+              <div className="text-5xl font-extrabold text-accent">{s.n}</div>
+              <h3 className="mt-3 font-bold text-lg">{s.title}</h3>
+              <p className="mt-2 text-sm text-primary-foreground/80">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- SOCIAL PROOF ---------------- */
+function SocialProof() {
+  const testimonials = [
+    { name: "Sophie L.", city: "Melun (77)", text: "Rénovation complète de notre Phénix : équipe pro, chantier propre, résultat impeccable. Je recommande !" },
+    { name: "Marc D.", city: "Mantes-la-Jolie (78)", text: "Spécialistes vraiment compétents sur l'ossature métallique. Devis clair, délais tenus." },
+    { name: "Nadia B.", city: "Évry (91)", text: "Fuite réparée en urgence sous 24h. Diagnostic précis et tarif honnête. Merci OEKO." },
+  ];
+  return (
+    <section className="py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="max-w-2xl">
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider">Témoignages</p>
+          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">Ils nous ont confié leur rénovation de toiture</h2>
+        </div>
+        <div className="mt-10 grid lg:grid-cols-3 gap-5">
+          {testimonials.map((t) => (
+            <figure key={t.name} className="rounded-2xl bg-card p-6 shadow-card ring-1 ring-border">
+              <div className="flex gap-1 mb-3">
+                {[...Array(5)].map((_, i) => <Star key={i} className="size-4 fill-accent text-accent" />)}
+              </div>
+              <blockquote className="text-sm leading-relaxed">"{t.text}"</blockquote>
+              <figcaption className="mt-4 text-sm">
+                <div className="font-bold">{t.name}</div>
+                <div className="text-muted-foreground">{t.city}</div>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        <div className="mt-10 grid sm:grid-cols-2 gap-5">
+          <img src={beforeAfter} alt="Avant / après rénovation toiture" width={1280} height={800} loading="lazy" className="rounded-2xl shadow-card w-full object-cover aspect-[16/10]" />
+          <img src={rooferWork} alt="Couvreur OEKO sur chantier" width={1024} height={1024} loading="lazy" className="rounded-2xl shadow-card w-full object-cover aspect-[16/10]" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- QUOTE FORM ---------------- */
+type FormData = {
+  project?: string;
+  roof?: string;
+  postal?: string;
+  city?: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  email?: string;
+};
+
+function QuoteForm() {
+  const [step, setStep] = useState(0);
+  const [data, setData] = useState<FormData>({});
+  const [submitted, setSubmitted] = useState(false);
+
+  const steps = ["Projet", "Toiture", "Localisation", "Coordonnées"];
+  const progress = ((step + (submitted ? 1 : 0)) / steps.length) * 100;
+
+  const projects = [
+    { id: "renovation", title: "Rénovation / Réfection complète", img: heroRoof },
+    { id: "reparation", title: "Réparation urgente ou fuite", img: rooferWork },
+    { id: "nettoyage", title: "Nettoyage, démoussage, hydrofuge", img: beforeAfter },
+    { id: "isolation", title: "Isolation / Amélioration énergétique", img: phenixHouse },
+  ];
+  const roofs = [
+    { id: "tuiles", title: "Tuiles (terre cuite ou béton)" },
+    { id: "ardoise", title: "Ardoise" },
+    { id: "zinc", title: "Zinc / Métal" },
+    { id: "autre", title: "Autre / Je ne sais pas" },
+  ];
+
+  const canNext = () => {
+    if (step === 0) return !!data.project;
+    if (step === 1) return !!data.roof;
+    if (step === 2) return !!(data.postal && /^\d{5}$/.test(data.postal) && data.city);
+    if (step === 3) return !!(data.firstName && data.lastName && data.phone && /^[0-9+\s().-]{8,}$/.test(data.phone || ""));
+    return false;
+  };
+
+  return (
+    <section id="devis" className="py-16 md:py-24 bg-secondary/40">
+      <div className="mx-auto max-w-3xl px-4">
+        <div className="text-center max-w-2xl mx-auto">
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider">Devis gratuit</p>
+          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">Obtenez votre devis gratuit pour rénovation de toiture</h2>
+          <p className="mt-3 text-muted-foreground">Réponse sous 48h • Sans engagement • 100% gratuit</p>
+        </div>
+
+        <div className="mt-8 rounded-3xl bg-card shadow-soft ring-1 ring-border p-5 md:p-8">
+          {!submitted && (
+            <>
+              <div className="flex items-center justify-between text-xs font-semibold text-muted-foreground mb-2">
+                <span>Étape {step + 1} sur {steps.length} — {steps[step]}</span>
+                <span>{Math.round(progress)}%</span>
+              </div>
+              <div className="h-2 w-full rounded-full bg-secondary overflow-hidden mb-6">
+                <div className="h-full bg-accent transition-all" style={{ width: `${progress}%` }} />
+              </div>
+            </>
+          )}
+
+          {submitted ? (
+            <SubmittedView />
+          ) : (
+            <>
+              {step === 0 && (
+                <StepGrid>
+                  {projects.map((p) => (
+                    <CardChoice key={p.id} active={data.project === p.id} onClick={() => setData({ ...data, project: p.id })} img={p.img} title={p.title} />
+                  ))}
+                </StepGrid>
+              )}
+
+              {step === 1 && (
+                <StepGrid>
+                  {roofs.map((r) => (
+                    <CardChoice key={r.id} active={data.roof === r.id} onClick={() => setData({ ...data, roof: r.id })} title={r.title} />
+                  ))}
+                </StepGrid>
+              )}
+
+              {step === 2 && <LocationStep data={data} setData={setData} />}
+
+              {step === 3 && <ContactStep data={data} setData={setData} />}
+
+              <div className="mt-7 flex items-center justify-between gap-3">
+                <button
+                  type="button"
+                  onClick={() => setStep((s) => Math.max(0, s - 1))}
+                  disabled={step === 0}
+                  className="px-5 py-3 rounded-full text-sm font-semibold text-muted-foreground hover:text-primary disabled:opacity-30"
+                >
+                  Précédent
+                </button>
+                {step < steps.length - 1 ? (
+                  <button
+                    type="button"
+                    disabled={!canNext()}
+                    onClick={() => setStep((s) => s + 1)}
+                    className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 font-semibold disabled:opacity-40 hover:bg-primary-deep transition"
+                  >
+                    Continuer <ArrowRight className="size-4" />
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    disabled={!canNext()}
+                    onClick={() => setSubmitted(true)}
+                    className="inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-6 py-3 font-bold disabled:opacity-40 hover:brightness-95 transition"
+                  >
+                    Envoyer ma demande <CheckCircle2 className="size-5" />
+                  </button>
+                )}
+              </div>
+            </>
+          )}
+        </div>
+        <p className="mt-4 text-center text-xs text-muted-foreground flex items-center justify-center gap-2">
+          <ShieldCheck className="size-4" /> Vos données sont confidentielles et utilisées uniquement pour votre devis.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function StepGrid({ children }: { children: React.ReactNode }) {
+  return <div className="grid sm:grid-cols-2 gap-3">{children}</div>;
+}
+
+function CardChoice({ active, onClick, img, title }: { active: boolean; onClick: () => void; img?: string; title: string }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`group relative text-left rounded-2xl ring-1 transition overflow-hidden ${
+        active ? "ring-2 ring-primary bg-primary/5" : "ring-border bg-card hover:ring-primary/40"
+      }`}
     >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
+      {img && (
+        <div className="h-28 w-full overflow-hidden">
+          <img src={img} alt="" className="w-full h-full object-cover group-hover:scale-105 transition" loading="lazy" />
+        </div>
+      )}
+      <div className="p-4 flex items-center justify-between gap-3">
+        <span className="font-semibold text-sm">{title}</span>
+        <span className={`size-5 rounded-full grid place-items-center shrink-0 ${active ? "bg-primary text-primary-foreground" : "border border-border"}`}>
+          {active && <CheckCircle2 className="size-4" />}
+        </span>
+      </div>
+    </button>
+  );
+}
+
+function LocationStep({ data, setData }: { data: FormData; setData: (d: FormData) => void }) {
+  const [postal, setPostal] = useState(data.postal || "");
+  const [city, setCity] = useState(data.city || "");
+  const [suggestions, setSuggestions] = useState<{ nom: string; codesPostaux: string[] }[]>([]);
+  const [open, setOpen] = useState(false);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (timer.current) clearTimeout(timer.current);
+    if (!/^\d{5}$/.test(postal)) { setSuggestions([]); return; }
+    timer.current = setTimeout(async () => {
+      try {
+        const res = await fetch(`https://geo.api.gouv.fr/communes?codePostal=${postal}&fields=nom,codesPostaux&format=json`);
+        const json = await res.json();
+        setSuggestions(json || []);
+        if (json?.length === 1) {
+          setCity(json[0].nom);
+          setData({ ...data, postal, city: json[0].nom });
+        } else {
+          setOpen(true);
+        }
+      } catch { setSuggestions([]); }
+    }, 250);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [postal]);
+
+  return (
+    <div className="space-y-4">
+      <div className="rounded-2xl bg-accent/30 ring-1 ring-accent/50 p-4 text-sm flex items-start gap-3">
+        <MapPin className="size-5 text-primary shrink-0 mt-0.5" />
+        <p>
+          Nous intervenons en <strong>Île-de-France (77, 78, 91)</strong> et départements limitrophes
+          (45, 60, 27, 28, 89, 10).
+        </p>
+      </div>
+      <div className="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label className="text-sm font-semibold">Code postal</label>
+          <input
+            type="text" inputMode="numeric" maxLength={5} value={postal}
+            onChange={(e) => setPostal(e.target.value.replace(/\D/g, ""))}
+            onBlur={() => setData({ ...data, postal, city })}
+            placeholder="75001"
+            className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-primary"
+          />
+        </div>
+        <div className="relative">
+          <label className="text-sm font-semibold">Ville</label>
+          <input
+            type="text" value={city}
+            onChange={(e) => { setCity(e.target.value); setOpen(true); }}
+            onBlur={() => { setData({ ...data, postal, city }); setTimeout(() => setOpen(false), 150); }}
+            placeholder="Votre ville"
+            className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-primary"
+          />
+          {open && suggestions.length > 1 && (
+            <ul className="absolute z-10 left-0 right-0 mt-1 max-h-56 overflow-auto rounded-xl bg-popover ring-1 ring-border shadow-soft">
+              {suggestions.map((s) => (
+                <li key={s.nom}>
+                  <button type="button" onMouseDown={(e) => { e.preventDefault(); setCity(s.nom); setData({ ...data, postal, city: s.nom }); setOpen(false); }}
+                    className="w-full text-left px-4 py-2 text-sm hover:bg-secondary">
+                    {s.nom}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ContactStep({ data, setData }: { data: FormData; setData: (d: FormData) => void }) {
+  return (
+    <div className="space-y-4">
+      <div className="grid sm:grid-cols-2 gap-4">
+        <Field label="Prénom *" value={data.firstName || ""} onChange={(v) => setData({ ...data, firstName: v })} placeholder="Marie" />
+        <Field label="Nom *" value={data.lastName || ""} onChange={(v) => setData({ ...data, lastName: v })} placeholder="Dupont" />
+      </div>
+      <div className="rounded-2xl bg-primary/5 ring-1 ring-primary/20 p-4">
+        <label className="text-sm font-bold text-primary flex items-center gap-2"><Phone className="size-4" /> Téléphone * <span className="text-xs font-normal text-muted-foreground">(pour vous rappeler rapidement)</span></label>
+        <input
+          type="tel" value={data.phone || ""}
+          onChange={(e) => setData({ ...data, phone: e.target.value })}
+          placeholder="06 12 34 56 78"
+          className="mt-2 w-full rounded-xl border-2 border-primary/30 bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-primary"
+        />
+      </div>
+      <Field label="Email" type="email" value={data.email || ""} onChange={(v) => setData({ ...data, email: v })} placeholder="marie@email.com" />
+    </div>
+  );
+}
+
+function Field({ label, value, onChange, placeholder, type = "text" }: { label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string }) {
+  return (
+    <div>
+      <label className="text-sm font-semibold">{label}</label>
+      <input
+        type={type} value={value} onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-primary"
       />
+    </div>
+  );
+}
+
+function SubmittedView() {
+  return (
+    <div className="text-center py-8">
+      <div className="mx-auto size-16 rounded-full bg-accent grid place-items-center">
+        <CheckCircle2 className="size-9 text-primary" />
+      </div>
+      <h3 className="mt-4 text-2xl font-extrabold">Merci, votre demande est bien reçue !</h3>
+      <p className="mt-2 text-muted-foreground">Un expert OEKO vous recontacte sous 48h pour planifier votre diagnostic gratuit.</p>
+      <div className="mt-5 inline-flex items-center gap-2 text-sm text-primary font-semibold">
+        <Clock className="size-4" /> Délai moyen de rappel : moins de 4h ouvrées
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- FAQ ---------------- */
+function FAQ() {
+  const items = [
+    { q: "Pourquoi faire appel à un spécialiste pour ma maison Phénix, Alskanor ou Castor ?", a: "Ces maisons à ossature métallique imposent des contraintes techniques particulières (portance, condensation, compatibilité matériaux). Un spécialiste garantit des travaux conformes et durables." },
+    { q: "Sous quel délai recevrai-je mon devis ?", a: "Vous recevez votre devis détaillé sous 48h après notre visite technique, entièrement gratuite et sans engagement." },
+    { q: "Quelles sont les zones d'intervention OEKO ?", a: "Toute l'Île-de-France (77, 78, 91) et les départements limitrophes : 45, 60, 27, 28, 89, 10." },
+    { q: "Êtes-vous certifiés RGE ?", a: "Oui, OEKO est certifié RGE Qualibat et couvert par la garantie décennale obligatoire." },
+    { q: "Puis-je bénéficier d'aides financières ?", a: "Selon les travaux (isolation notamment), vous pouvez prétendre à MaPrimeRénov', CEE, éco-PTZ. Nous vous accompagnons dans les démarches." },
+  ];
+  return (
+    <section id="faq" className="py-16 md:py-24">
+      <div className="mx-auto max-w-3xl px-4">
+        <div className="text-center">
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider">FAQ</p>
+          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">Questions fréquentes</h2>
+        </div>
+        <Accordion type="single" collapsible className="mt-8 space-y-3">
+          {items.map((it, i) => (
+            <AccordionItem key={i} value={`item-${i}`} className="rounded-2xl border border-border bg-card px-5 shadow-card">
+              <AccordionTrigger className="text-left font-semibold hover:no-underline">{it.q}</AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">{it.a}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- FINAL CTA ---------------- */
+function FinalCTA() {
+  return (
+    <section className="py-16 md:py-24 bg-hero-gradient text-primary-foreground">
+      <div className="mx-auto max-w-5xl px-4 text-center">
+        <h2 className="text-3xl md:text-5xl font-extrabold">Prêt à rénover votre toiture en toute sérénité ?</h2>
+        <p className="mt-4 text-primary-foreground/85 max-w-2xl mx-auto">
+          Devis gratuit sous 48h • Spécialiste maisons à ossature métallique • Intervention Île-de-France & limitrophes.
+        </p>
+        <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="#devis" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground px-7 py-4 text-base font-bold shadow-soft hover:brightness-95 transition">
+            Obtenir mon devis gratuit <ArrowRight className="size-5" />
+          </a>
+          <a href="tel:+33100000000" className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 ring-1 ring-white/25 px-7 py-4 text-base font-semibold hover:bg-white/15 transition">
+            <Phone className="size-5" /> Appeler OEKO
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- FOOTER ---------------- */
+function Footer() {
+  return (
+    <footer className="bg-primary-deep text-primary-foreground/80">
+      <div className="mx-auto max-w-7xl px-4 py-12 grid md:grid-cols-3 gap-8">
+        <div>
+          <img src={LOGO} alt="OEKO" width={120} height={36} className="h-9 w-auto" />
+          <p className="mt-4 text-sm">Spécialiste rénovation toiture & couverture pour maisons à ossature métallique. Île-de-France et limitrophes.</p>
+        </div>
+        <div>
+          <h4 className="font-bold text-primary-foreground">Prestations</h4>
+          <ul className="mt-3 space-y-2 text-sm">
+            <li>Rénovation complète</li>
+            <li>Réparation & urgence</li>
+            <li>Nettoyage & démoussage</li>
+            <li>Gouttières & zinguerie</li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-bold text-primary-foreground">Certifications</h4>
+          <ul className="mt-3 space-y-2 text-sm">
+            <li>RGE Qualibat</li>
+            <li>Garantie Décennale</li>
+            <li>17 ans d'expertise</li>
+          </ul>
+        </div>
+      </div>
+      <div className="border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-4 py-5 text-xs flex flex-wrap items-center justify-between gap-3">
+          <span>© {new Date().getFullYear()} OEKO. Tous droits réservés.</span>
+          <span>Phénix®, Alskanor® et Castor® sont des marques de leurs propriétaires respectifs.</span>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+/* ---------------- STICKY MOBILE CTA ---------------- */
+function StickyMobileCTA() {
+  return (
+    <div className="md:hidden fixed bottom-3 inset-x-3 z-40">
+      <a href="#devis" className="flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground py-4 font-bold shadow-soft">
+        Devis gratuit sous 48h <ArrowRight className="size-5" />
+      </a>
     </div>
   );
 }
