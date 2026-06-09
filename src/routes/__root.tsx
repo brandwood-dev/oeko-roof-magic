@@ -77,18 +77,37 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "OEKO Roof Masters is a modern, mobile-first landing page for roofing renovation services." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "OEKO Roof Masters is a modern, mobile-first landing page for roofing renovation services." },
+      { title: "OEKO - Renovation de toiture en Ile-de-France" },
+      {
+        name: "description",
+        content:
+          "OEKO Roof Masters is a modern, mobile-first landing page for roofing renovation services.",
+      },
+      { name: "author", content: "OEKO" },
+      { property: "og:title", content: "OEKO - Renovation de toiture en Ile-de-France" },
+      {
+        property: "og:description",
+        content:
+          "OEKO Roof Masters is a modern, mobile-first landing page for roofing renovation services.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Lovable App" },
-      { name: "twitter:description", content: "OEKO Roof Masters is a modern, mobile-first landing page for roofing renovation services." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/67a5d3c6-828d-41cc-886a-9ad64750683e/id-preview-61ae30ff--90d772f7-babd-409e-a240-444d4fdde9ec.lovable.app-1780807263565.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/67a5d3c6-828d-41cc-886a-9ad64750683e/id-preview-61ae30ff--90d772f7-babd-409e-a240-444d4fdde9ec.lovable.app-1780807263565.png" },
+      { name: "twitter:title", content: "OEKO - Renovation de toiture en Ile-de-France" },
+      {
+        name: "twitter:description",
+        content:
+          "OEKO Roof Masters is a modern, mobile-first landing page for roofing renovation services.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/67a5d3c6-828d-41cc-886a-9ad64750683e/id-preview-61ae30ff--90d772f7-babd-409e-a240-444d4fdde9ec.lovable.app-1780807263565.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/67a5d3c6-828d-41cc-886a-9ad64750683e/id-preview-61ae30ff--90d772f7-babd-409e-a240-444d4fdde9ec.lovable.app-1780807263565.png",
+      },
     ],
     links: [
       {
@@ -111,7 +130,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <head>
         <HeadContent />
       </head>
