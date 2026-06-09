@@ -1,7 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  ShieldCheck, Award, HardHat, HeartHandshake, Wrench, Sparkles, CloudRain, Home,
+  ShieldCheck, Award, HardHat, HeartHandshake, Wrench, Sparkles, CloudRain, Home, Loader2,
   Star, Phone, ArrowRight, CheckCircle2, ChevronDown, MapPin, Clock,
 } from "lucide-react";
 import {
@@ -337,12 +337,13 @@ type FormData = {
 };
 
 function QuoteForm() {
+  const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [data, setData] = useState<FormData>({});
-  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const steps = ["Projet", "Toiture", "Localisation", "Coordonnées"];
-  const progress = ((step + (submitted ? 1 : 0)) / steps.length) * 100;
+  const progress = ((step + 1) / steps.length) * 100;
 
   const projects = [
     { id: "renovation", title: "Rénovation / Réfection complète", img: heroRoof },
@@ -365,6 +366,17 @@ function QuoteForm() {
     return false;
   };
 
+  const handleSubmit = async () => {
+    if (!canNext() || submitting) return;
+    setSubmitting(true);
+    try {
+      await new Promise((r) => setTimeout(r, 600));
+      navigate({ to: "/merci" });
+    } catch {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <section id="devis" className="py-16 md:py-24 bg-secondary/40">
       <div className="mx-auto max-w-3xl px-4">
@@ -375,8 +387,6 @@ function QuoteForm() {
         </div>
 
         <div className="mt-8 rounded-3xl bg-card shadow-soft ring-1 ring-border p-5 md:p-8">
-          {!submitted && (
-            <>
               <div className="flex items-center justify-between text-xs font-semibold text-muted-foreground mb-2">
                 <span>Étape {step + 1} sur {steps.length} — {steps[step]}</span>
                 <span>{Math.round(progress)}%</span>
@@ -384,13 +394,7 @@ function QuoteForm() {
               <div className="h-2 w-full rounded-full bg-secondary overflow-hidden mb-6">
                 <div className="h-full bg-accent transition-all" style={{ width: `${progress}%` }} />
               </div>
-            </>
-          )}
-
-          {submitted ? (
-            <SubmittedView />
-          ) : (
-            <>
+          <>
               {step === 0 && (
                 <StepGrid>
                   {projects.map((p) => (
@@ -415,7 +419,7 @@ function QuoteForm() {
                 <button
                   type="button"
                   onClick={() => setStep((s) => Math.max(0, s - 1))}
-                  disabled={step === 0}
+                  disabled={step === 0 || submitting}
                   className="px-5 py-3 rounded-full text-sm font-semibold text-muted-foreground hover:text-primary disabled:opacity-30"
                 >
                   Précédent
@@ -432,16 +436,19 @@ function QuoteForm() {
                 ) : (
                   <button
                     type="button"
-                    disabled={!canNext()}
-                    onClick={() => setSubmitted(true)}
+                    disabled={!canNext() || submitting}
+                    onClick={handleSubmit}
                     className="inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-6 py-3 font-bold disabled:opacity-40 hover:brightness-95 transition"
                   >
-                    Envoyer ma demande <CheckCircle2 className="size-5" />
+                    {submitting ? (
+                      <>Envoi en cours… <Loader2 className="size-5 animate-spin" /></>
+                    ) : (
+                      <>Envoyer ma demande <CheckCircle2 className="size-5" /></>
+                    )}
                   </button>
                 )}
               </div>
-            </>
-          )}
+          </>
         </div>
         <p className="mt-4 text-center text-xs text-muted-foreground flex items-center justify-center gap-2">
           <ShieldCheck className="size-4" /> Vos données sont confidentielles et utilisées uniquement pour votre devis.
@@ -582,21 +589,6 @@ function Field({ label, value, onChange, placeholder, type = "text" }: { label: 
         placeholder={placeholder}
         className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-primary"
       />
-    </div>
-  );
-}
-
-function SubmittedView() {
-  return (
-    <div className="text-center py-8">
-      <div className="mx-auto size-16 rounded-full bg-accent grid place-items-center">
-        <CheckCircle2 className="size-9 text-primary" />
-      </div>
-      <h3 className="mt-4 text-2xl font-extrabold">Merci, votre demande est bien reçue !</h3>
-      <p className="mt-2 text-muted-foreground">Un expert OEKO vous recontacte sous 48h pour planifier votre diagnostic gratuit.</p>
-      <div className="mt-5 inline-flex items-center gap-2 text-sm text-primary font-semibold">
-        <Clock className="size-4" /> Délai moyen de rappel : moins de 4h ouvrées
-      </div>
     </div>
   );
 }
