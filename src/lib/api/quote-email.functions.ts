@@ -20,7 +20,7 @@ const quoteLeadSchema = z.object({
 });
 
 export const submitQuoteLead = createServerFn({ method: "POST" })
-  .validator(quoteLeadSchema)
+  .inputValidator(quoteLeadSchema)
   .handler(async ({ data }) => {
     const { sendQuoteLead } = await import("../lead-email.server");
 
