@@ -593,21 +593,6 @@ function Field({ label, value, onChange, placeholder, type = "text" }: { label: 
   );
 }
 
-function SubmittedView() {
-  return (
-    <div className="text-center py-8">
-      <div className="mx-auto size-16 rounded-full bg-accent grid place-items-center">
-        <CheckCircle2 className="size-9 text-primary" />
-      </div>
-      <h3 className="mt-4 text-2xl font-extrabold">Merci, votre demande est bien reçue !</h3>
-      <p className="mt-2 text-muted-foreground">Un expert OEKO vous recontacte sous 48h pour planifier votre diagnostic gratuit.</p>
-      <div className="mt-5 inline-flex items-center gap-2 text-sm text-primary font-semibold">
-        <Clock className="size-4" /> Délai moyen de rappel : moins de 4h ouvrées
-      </div>
-    </div>
-  );
-}
-
 /* ---------------- FAQ ---------------- */
 function FAQ() {
   const items = [
