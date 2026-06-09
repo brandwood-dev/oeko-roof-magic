@@ -7,6 +7,7 @@ import {
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
+import { submitQuoteLead } from "@/lib/api/quote-email.functions";
 import heroRoof from "@/assets/hero-roof.jpg";
 import rooferWork from "@/assets/roofer-work.jpg";
 import beforeAfter from "@/assets/before-after.jpg";
@@ -341,6 +342,7 @@ function QuoteForm() {
   const [step, setStep] = useState(0);
   const [data, setData] = useState<FormData>({});
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const steps = ["Projet", "Toiture", "Localisation", "Coordonnées"];
   const progress = ((step + 1) / steps.length) * 100;
@@ -366,13 +368,34 @@ function QuoteForm() {
     return false;
   };
 
+  const getLabel = (items: { id: string; title: string }[], id?: string) =>
+    items.find((item) => item.id === id)?.title ?? id ?? "";
+
   const handleSubmit = async () => {
     if (!canNext() || submitting) return;
+
     setSubmitting(true);
+    setSubmitError(null);
+
     try {
-      await new Promise((r) => setTimeout(r, 600));
+      await submitQuoteLead({
+        data: {
+          project: getLabel(projects, data.project),
+          roof: getLabel(roofs, data.roof),
+          postal: data.postal || "",
+          city: data.city || "",
+          firstName: data.firstName || "",
+          lastName: data.lastName || "",
+          phone: data.phone || "",
+          email: data.email || "",
+          pageUrl: typeof window !== "undefined" ? window.location.href : undefined,
+        },
+      });
+
       navigate({ to: "/merci" });
-    } catch {
+    } catch (error) {
+      console.error(error);
+      setSubmitError("Votre demande n'a pas pu être envoyée. Veuillez réessayer ou nous contacter par téléphone.");
       setSubmitting(false);
     }
   };
@@ -414,6 +437,12 @@ function QuoteForm() {
               {step === 2 && <LocationStep data={data} setData={setData} />}
 
               {step === 3 && <ContactStep data={data} setData={setData} />}
+
+              {submitError && (
+                <div className="mt-5 rounded-2xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+                  {submitError}
+                </div>
+              )}
 
               <div className="mt-7 flex items-center justify-between gap-3">
                 <button
