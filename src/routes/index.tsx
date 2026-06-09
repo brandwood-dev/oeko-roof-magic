@@ -1,7 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  ShieldCheck, Award, HardHat, HeartHandshake, Wrench, Sparkles, CloudRain, Home,
+  ShieldCheck, Award, HardHat, HeartHandshake, Wrench, Sparkles, CloudRain, Home, Loader2,
   Star, Phone, ArrowRight, CheckCircle2, ChevronDown, MapPin, Clock,
 } from "lucide-react";
 import {
