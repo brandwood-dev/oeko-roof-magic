@@ -50,7 +50,6 @@ const buildEmailText = (lead: QuoteLead) =>
     `Ville: ${lead.city}`,
     `Projet: ${lead.project}`,
     `Type de toiture: ${lead.roof}`,
-    `Page: ${lead.pageUrl || "Non renseignee"}`,
     `Date: ${lead.submittedAt}`,
   ].join("\n");
 
@@ -63,7 +62,6 @@ const buildEmailHtml = (lead: QuoteLead) => {
     ["Ville", lead.city],
     ["Projet", lead.project],
     ["Type de toiture", lead.roof],
-    ["Page", lead.pageUrl || "Non renseignee"],
     ["Date", lead.submittedAt],
   ];
 
