@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import {
   ShieldCheck, Award, HardHat, HeartHandshake, Wrench, Sparkles, CloudRain, Home, Loader2,
   Star, Phone, ArrowRight, CheckCircle2, ChevronDown, MapPin, Clock,
@@ -14,6 +14,32 @@ import beforeAfter from "@/assets/before-after.jpg";
 import phenixHouse from "@/assets/phenix-house.jpg";
 
 const LOGO = "https://res.cloudinary.com/dxkxiy900/image/upload/v1772626532/ok_tefpqi.png";
+const OEKO_PHONE = "01 89 70 17 27";
+const OEKO_PHONE_HREF = "tel:+33189701727";
+const OEKO_ADDRESS = "16 Bis Bd Chamblain 77000 Melun";
+const OEKO_EMAIL = "contact@oeko.fr";
+const WEBFLOW_LP_PATH = "/lp/devis-toiture";
+const SECTION_PATHS = {
+  prestations: `${WEBFLOW_LP_PATH}/prestations`,
+  expertise: `${WEBFLOW_LP_PATH}/expertise`,
+  etapes: `${WEBFLOW_LP_PATH}/etapes`,
+  faq: `${WEBFLOW_LP_PATH}/faq`,
+} as const;
+
+type SectionId = keyof typeof SECTION_PATHS;
+
+function navigateToSection(event: MouseEvent<HTMLAnchorElement>, section: SectionId) {
+  event.preventDefault();
+  document.getElementById(section)?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  const path = SECTION_PATHS[section];
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "oeko:navigate-section", path, section }, "https://www.oeko.fr");
+    return;
+  }
+
+  window.history.pushState({}, "", path);
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -58,10 +84,10 @@ function Header() {
           <img src={LOGO} alt="OEKO" width={120} height={36} className="h-9 w-auto" />
         </a>
         <div className="hidden md:flex items-center gap-6 text-primary-foreground/90 text-sm font-medium">
-          <a href="#prestations" className="hover:text-accent">Prestations</a>
-          <a href="#expertise" className="hover:text-accent">Expertise</a>
-          <a href="#etapes" className="hover:text-accent">Étapes</a>
-          <a href="#faq" className="hover:text-accent">FAQ</a>
+          <a href={SECTION_PATHS.prestations} onClick={(event) => navigateToSection(event, "prestations")} className="hover:text-accent">Prestations</a>
+          <a href={SECTION_PATHS.expertise} onClick={(event) => navigateToSection(event, "expertise")} className="hover:text-accent">Expertise</a>
+          <a href={SECTION_PATHS.etapes} onClick={(event) => navigateToSection(event, "etapes")} className="hover:text-accent">Étapes</a>
+          <a href={SECTION_PATHS.faq} onClick={(event) => navigateToSection(event, "faq")} className="hover:text-accent">FAQ</a>
         </div>
         <a href="#devis" className="inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-4 py-2 text-sm font-semibold hover:brightness-95 transition">
           <Phone className="size-4" /> <span className="hidden sm:inline">Devis gratuit</span>
@@ -97,7 +123,7 @@ function Hero() {
             <a href="#devis" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground px-6 py-4 text-base font-bold shadow-soft hover:brightness-95 transition">
               Obtenir mon devis gratuit <ArrowRight className="size-5" />
             </a>
-            <a href="tel:+33100000000" className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 ring-1 ring-white/25 px-6 py-4 text-base font-semibold hover:bg-white/15 transition">
+            <a href={OEKO_PHONE_HREF} className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 ring-1 ring-white/25 px-6 py-4 text-base font-semibold hover:bg-white/15 transition">
               <Phone className="size-5" /> Nous appeler
             </a>
           </div>
@@ -354,10 +380,10 @@ function QuoteForm() {
     { id: "isolation", title: "Isolation / Amélioration énergétique", img: phenixHouse },
   ];
   const roofs = [
-    { id: "tuiles", title: "Tuiles (terre cuite ou béton)" },
-    { id: "ardoise", title: "Ardoise" },
-    { id: "zinc", title: "Zinc / Métal" },
-    { id: "autre", title: "Autre / Je ne sais pas" },
+    { id: "tuiles", title: "Tuiles (terre cuite ou béton)", img: heroRoof },
+    { id: "ardoise", title: "Ardoise", img: beforeAfter },
+    { id: "zinc", title: "Zinc / Métal", img: rooferWork },
+    { id: "autre", title: "Autre / Je ne sais pas", img: phenixHouse },
   ];
 
   const canNext = () => {
@@ -429,7 +455,7 @@ function QuoteForm() {
               {step === 1 && (
                 <StepGrid>
                   {roofs.map((r) => (
-                    <CardChoice key={r.id} active={data.roof === r.id} onClick={() => setData({ ...data, roof: r.id })} title={r.title} />
+                    <CardChoice key={r.id} active={data.roof === r.id} onClick={() => setData({ ...data, roof: r.id })} img={r.img} title={r.title} />
                   ))}
                 </StepGrid>
               )}
@@ -664,7 +690,7 @@ function FinalCTA() {
           <a href="#devis" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground px-7 py-4 text-base font-bold shadow-soft hover:brightness-95 transition">
             Obtenir mon devis gratuit <ArrowRight className="size-5" />
           </a>
-          <a href="tel:+33100000000" className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 ring-1 ring-white/25 px-7 py-4 text-base font-semibold hover:bg-white/15 transition">
+          <a href={OEKO_PHONE_HREF} className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 ring-1 ring-white/25 px-7 py-4 text-base font-semibold hover:bg-white/15 transition">
             <Phone className="size-5" /> Appeler OEKO
           </a>
         </div>
@@ -677,7 +703,7 @@ function FinalCTA() {
 function Footer() {
   return (
     <footer className="bg-primary-deep text-primary-foreground/80">
-      <div className="mx-auto max-w-7xl px-4 py-12 grid md:grid-cols-3 gap-8">
+      <div className="mx-auto max-w-7xl px-4 py-12 grid md:grid-cols-4 gap-8">
         <div>
           <img src={LOGO} alt="OEKO" width={120} height={36} className="h-9 w-auto" />
           <p className="mt-4 text-sm">Spécialiste rénovation toiture & couverture pour maisons à ossature métallique. Île-de-France et limitrophes.</p>
@@ -699,11 +725,21 @@ function Footer() {
             <li>17 ans d'expertise</li>
           </ul>
         </div>
+        <div>
+          <h4 className="font-bold text-primary-foreground">Coordonnées</h4>
+          <ul className="mt-3 space-y-2 text-sm">
+            <li>{OEKO_ADDRESS}</li>
+            <li><a href={OEKO_PHONE_HREF} className="hover:text-accent">{OEKO_PHONE}</a></li>
+            <li><a href={`mailto:${OEKO_EMAIL}`} className="hover:text-accent">{OEKO_EMAIL}</a></li>
+            <li><a href="https://www.oeko.fr/mentions-legales" target="_top" className="hover:text-accent">Mentions légales</a></li>
+            <li><a href="https://www.oeko.fr/politique-de-confidentialite" target="_top" className="hover:text-accent">Politique de confidentialité</a></li>
+          </ul>
+        </div>
       </div>
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 py-5 text-xs flex flex-wrap items-center justify-between gap-3">
           <span>© {new Date().getFullYear()} OEKO. Tous droits réservés.</span>
-          <span>Phénix®, Alskanor® et Castor® sont des marques de leurs propriétaires respectifs.</span>
+          <span>Phénix®, Alskanor® et Castor® sont des marques déposées appartenant à leurs ayants droit respectifs. OEKO est une entreprise indépendante sans lien commercial ni capitalistique avec ces marques.</span>
         </div>
       </div>
     </footer>

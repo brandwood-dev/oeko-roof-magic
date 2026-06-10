@@ -4,6 +4,10 @@ import {
 } from "lucide-react";
 
 const LOGO = "https://res.cloudinary.com/dxkxiy900/image/upload/v1772626532/ok_tefpqi.png";
+const OEKO_PHONE = "01 89 70 17 27";
+const OEKO_PHONE_HREF = "tel:+33189701727";
+const OEKO_ADDRESS = "16 Bis Bd Chamblain 77000 Melun";
+const OEKO_EMAIL = "contact@oeko.fr";
 
 export const Route = createFileRoute("/merci")({
   head: () => ({
@@ -72,7 +76,7 @@ function HeroThankYou() {
         </p>
         <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
           <a
-            href="tel:+33100000000"
+            href={OEKO_PHONE_HREF}
             className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground px-7 py-4 text-base font-bold shadow-soft hover:brightness-95 transition"
           >
             <Phone className="size-5" /> Appeler OEKO maintenant
@@ -165,7 +169,7 @@ function ContactBlock() {
               </p>
               <div className="mt-8 space-y-4">
                 <a
-                  href="tel:+33100000000"
+                  href={OEKO_PHONE_HREF}
                   className="flex items-center gap-4 rounded-2xl bg-white/10 ring-1 ring-white/20 p-4 hover:bg-white/15 transition"
                 >
                   <div className="size-12 rounded-full bg-accent grid place-items-center shrink-0">
@@ -173,11 +177,11 @@ function ContactBlock() {
                   </div>
                   <div>
                     <div className="text-xs text-primary-foreground/70">Par téléphone</div>
-                    <div className="font-bold text-lg">01 00 00 00 00</div>
+                    <div className="font-bold text-lg">{OEKO_PHONE}</div>
                   </div>
                 </a>
                 <a
-                  href="mailto:contact@oeko.fr"
+                  href={`mailto:${OEKO_EMAIL}`}
                   className="flex items-center gap-4 rounded-2xl bg-white/10 ring-1 ring-white/20 p-4 hover:bg-white/15 transition"
                 >
                   <div className="size-12 rounded-full bg-accent grid place-items-center shrink-0">
@@ -185,7 +189,7 @@ function ContactBlock() {
                   </div>
                   <div>
                     <div className="text-xs text-primary-foreground/70">Par email</div>
-                    <div className="font-bold text-lg">contact@oeko.fr</div>
+                    <div className="font-bold text-lg">{OEKO_EMAIL}</div>
                   </div>
                 </a>
               </div>
@@ -229,7 +233,7 @@ function ContactBlock() {
 function Footer() {
   return (
     <footer className="bg-primary-deep text-primary-foreground/80">
-      <div className="mx-auto max-w-7xl px-4 py-12 grid md:grid-cols-3 gap-8">
+      <div className="mx-auto max-w-7xl px-4 py-12 grid md:grid-cols-4 gap-8">
         <div>
           <img src={LOGO} alt="OEKO" width={120} height={36} className="h-9 w-auto" />
           <p className="mt-4 text-sm">
@@ -253,11 +257,21 @@ function Footer() {
             <li>17 ans d'expertise</li>
           </ul>
         </div>
+        <div>
+          <h4 className="font-bold text-primary-foreground">Coordonnées</h4>
+          <ul className="mt-3 space-y-2 text-sm">
+            <li>{OEKO_ADDRESS}</li>
+            <li><a href={OEKO_PHONE_HREF} className="hover:text-accent">{OEKO_PHONE}</a></li>
+            <li><a href={`mailto:${OEKO_EMAIL}`} className="hover:text-accent">{OEKO_EMAIL}</a></li>
+            <li><a href="https://www.oeko.fr/mentions-legales" target="_top" className="hover:text-accent">Mentions légales</a></li>
+            <li><a href="https://www.oeko.fr/politique-de-confidentialite" target="_top" className="hover:text-accent">Politique de confidentialité</a></li>
+          </ul>
+        </div>
       </div>
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 py-5 text-xs flex flex-wrap items-center justify-between gap-3">
           <span>© {new Date().getFullYear()} OEKO. Tous droits réservés.</span>
-          <span>Phénix®, Alskanor® et Castor® sont des marques de leurs propriétaires respectifs.</span>
+          <span>Phénix®, Alskanor® et Castor® sont des marques déposées appartenant à leurs ayants droit respectifs. OEKO est une entreprise indépendante sans lien commercial ni capitalistique avec ces marques.</span>
         </div>
       </div>
     </footer>
