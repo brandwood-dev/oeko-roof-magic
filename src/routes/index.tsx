@@ -370,8 +370,8 @@ function SocialProof() {
 function BeforeAfterGallery() {
   const projects = [
     { before: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781208680/AV_egoyrj.jpg", after: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781208680/AP_dili7n.jpg", city: "Lardy (91)", type: "Nettoyage, démoussage, hydrofuge" },
-    { before: beforeAfter, after: phenixHouse, city: "Mantes-la-Jolie (78)", type: "Alskanor® • Réfection couverture" },
-    { before: phenixHouse, after: heroRoof, city: "Évry (91)", type: "Castor® • Isolation + couverture" },
+    { before: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781210239/AV_baaxi8.jpg", after: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781210239/AP_irdue5.jpg", city: "Claye-Souilly (77)", type: "Isolation / Amélioration énergétique" },
+    { before: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781210459/AV_hhh2vz.jpg", after: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781210459/AP_txbuwn.jpg", city: "Rambouillet (78)", type: "Rénovation / Réfection complète" },
     { before: heroRoof, after: rooferWork, city: "Fontainebleau (77)", type: "Phénix® • Démoussage & hydrofuge" },
     { before: rooferWork, after: beforeAfter, city: "Versailles (78)", type: "Maison ossature métallique" },
     { before: beforeAfter, after: heroRoof, city: "Étampes (91)", type: "Zinguerie & gouttières complètes" },
