@@ -7,6 +7,7 @@ import {
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
+import { OekoFooter } from "@/components/oeko-footer";
 import { submitQuoteLead } from "@/lib/api/quote-email.functions";
 import heroRoof from "@/assets/hero-roof.jpg";
 import rooferWork from "@/assets/roofer-work.jpg";
@@ -14,10 +15,7 @@ import beforeAfter from "@/assets/before-after.jpg";
 import phenixHouse from "@/assets/phenix-house.jpg";
 
 const LOGO = "https://res.cloudinary.com/dxkxiy900/image/upload/v1772626532/ok_tefpqi.png";
-const OEKO_PHONE = "01 89 70 17 27";
 const OEKO_PHONE_HREF = "tel:+33189701727";
-const OEKO_ADDRESS = "16 Bis Bd Chamblain 77000 Melun";
-const OEKO_EMAIL = "contact@oeko.fr";
 const WEBFLOW_LP_PATH = "/lp/devis-toiture";
 const SECTION_PATHS = {
   prestations: `${WEBFLOW_LP_PATH}/prestations`,
@@ -69,7 +67,7 @@ function Landing() {
       <QuoteForm />
       <FAQ />
       <FinalCTA />
-      <Footer />
+      <OekoFooter />
       <StickyMobileCTA />
     </div>
   );
@@ -696,53 +694,6 @@ function FinalCTA() {
         </div>
       </div>
     </section>
-  );
-}
-
-/* ---------------- FOOTER ---------------- */
-function Footer() {
-  return (
-    <footer className="bg-primary-deep text-primary-foreground/80">
-      <div className="mx-auto max-w-7xl px-4 py-12 grid md:grid-cols-4 gap-8">
-        <div>
-          <img src={LOGO} alt="OEKO" width={120} height={36} className="h-9 w-auto" />
-          <p className="mt-4 text-sm">Spécialiste rénovation toiture & couverture pour maisons à ossature métallique. Île-de-France et limitrophes.</p>
-        </div>
-        <div>
-          <h4 className="font-bold text-primary-foreground">Prestations</h4>
-          <ul className="mt-3 space-y-2 text-sm">
-            <li>Rénovation complète</li>
-            <li>Réparation & urgence</li>
-            <li>Nettoyage & démoussage</li>
-            <li>Gouttières & zinguerie</li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-bold text-primary-foreground">Certifications</h4>
-          <ul className="mt-3 space-y-2 text-sm">
-            <li>RGE Qualibat</li>
-            <li>Garantie Décennale</li>
-            <li>17 ans d'expertise</li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-bold text-primary-foreground">Coordonnées</h4>
-          <ul className="mt-3 space-y-2 text-sm">
-            <li>{OEKO_ADDRESS}</li>
-            <li><a href={OEKO_PHONE_HREF} className="hover:text-accent">{OEKO_PHONE}</a></li>
-            <li><a href={`mailto:${OEKO_EMAIL}`} className="hover:text-accent">{OEKO_EMAIL}</a></li>
-            <li><a href="https://www.oeko.fr/mentions-legales" target="_top" className="hover:text-accent">Mentions légales</a></li>
-            <li><a href="https://www.oeko.fr/politique-de-confidentialite" target="_top" className="hover:text-accent">Politique de confidentialité</a></li>
-          </ul>
-        </div>
-      </div>
-      <div className="border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-4 py-5 text-xs flex flex-wrap items-center justify-between gap-3">
-          <span>© {new Date().getFullYear()} OEKO. Tous droits réservés.</span>
-          <span>Phénix®, Alskanor® et Castor® sont des marques déposées appartenant à leurs ayants droit respectifs. OEKO est une entreprise indépendante sans lien commercial ni capitalistique avec ces marques.</span>
-        </div>
-      </div>
-    </footer>
   );
 }
 
