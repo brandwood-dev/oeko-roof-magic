@@ -157,13 +157,33 @@ function Hero() {
 }
 
 function TrustStrip() {
-  const items = ["Phénix®", "Alskanor®", "Castor®", "RGE Qualibat", "Garantie Décennale", "Devis 48h"];
+  // Marquee animé — 3 variations de messages SEO/dynamiques en boucle infinie
+  const messages = [
+    "✓ Spécialiste Rénovation Toiture Phénix®, Alskanor®, Castor® en Île-de-France",
+    "✓ Devis Gratuit sous 48h • Intervention 7j/7 • Sans engagement",
+    "✓ 17 ans d'expertise • RGE Qualibat • Garantie Décennale Couvreur Pro",
+  ];
+  // dupliqué pour défilement seamless
+  const loop = [...messages, ...messages, ...messages, ...messages];
   return (
-    <div className="border-y border-border bg-secondary/50">
-      <div className="mx-auto max-w-7xl px-4 py-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-muted-foreground">
-        {items.map((i) => (
-          <span key={i} className="font-semibold text-primary">{i}</span>
-        ))}
+    <div className="border-y border-border bg-primary text-primary-foreground overflow-hidden">
+      <div className="relative flex">
+        <div className="flex shrink-0 animate-marquee gap-12 py-3 pr-12 whitespace-nowrap text-sm font-semibold">
+          {loop.map((msg, i) => (
+            <span key={i} className="inline-flex items-center gap-3">
+              <span>{msg}</span>
+              <span className="text-accent">★</span>
+            </span>
+          ))}
+        </div>
+        <div aria-hidden="true" className="flex shrink-0 animate-marquee gap-12 py-3 pr-12 whitespace-nowrap text-sm font-semibold">
+          {loop.map((msg, i) => (
+            <span key={`d-${i}`} className="inline-flex items-center gap-3">
+              <span>{msg}</span>
+              <span className="text-accent">★</span>
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
