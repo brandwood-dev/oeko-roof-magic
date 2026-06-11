@@ -121,7 +121,7 @@ function Hero() {
             <a href="#devis" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground px-6 py-4 text-base font-bold shadow-soft hover:brightness-95 transition">
               Obtenir mon devis gratuit <ArrowRight className="size-5" />
             </a>
-            <a href={OEKO_PHONE_HREF} className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 ring-1 ring-white/25 px-6 py-4 text-base font-semibold hover:bg-white/15 transition">
+            <a href={OEKO_PHONE_HREF} target="_top" rel="noopener" className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 ring-1 ring-white/25 px-6 py-4 text-base font-semibold hover:bg-white/15 transition">
               <Phone className="size-5" /> Nous appeler
             </a>
           </div>
@@ -708,7 +708,7 @@ function FinalCTA() {
           <a href="#devis" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground px-7 py-4 text-base font-bold shadow-soft hover:brightness-95 transition">
             Obtenir mon devis gratuit <ArrowRight className="size-5" />
           </a>
-          <a href={OEKO_PHONE_HREF} className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 ring-1 ring-white/25 px-7 py-4 text-base font-semibold hover:bg-white/15 transition">
+          <a href={OEKO_PHONE_HREF} target="_top" rel="noopener" className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 ring-1 ring-white/25 px-7 py-4 text-base font-semibold hover:bg-white/15 transition">
             <Phone className="size-5" /> Appeler OEKO
           </a>
         </div>
