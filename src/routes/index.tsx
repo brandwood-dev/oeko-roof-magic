@@ -121,7 +121,7 @@ function Hero() {
             <a href="#devis" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground px-6 py-4 text-base font-bold shadow-soft hover:brightness-95 transition">
               Obtenir mon devis gratuit <ArrowRight className="size-5" />
             </a>
-            <a href={OEKO_PHONE_HREF} className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 ring-1 ring-white/25 px-6 py-4 text-base font-semibold hover:bg-white/15 transition">
+            <a href={OEKO_PHONE_HREF} target="_top" rel="noopener" className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 ring-1 ring-white/25 px-6 py-4 text-base font-semibold hover:bg-white/15 transition">
               <Phone className="size-5" /> Nous appeler
             </a>
           </div>
@@ -157,13 +157,33 @@ function Hero() {
 }
 
 function TrustStrip() {
-  const items = ["Phénix®", "Alskanor®", "Castor®", "RGE Qualibat", "Garantie Décennale", "Devis 48h"];
+  // Marquee animé — 3 variations de messages SEO/dynamiques en boucle infinie
+  const messages = [
+    "✓ Spécialiste Rénovation Toiture Phénix®, Alskanor®, Castor® en Île-de-France",
+    "✓ Devis Gratuit sous 48h • Intervention 7j/7 • Sans engagement",
+    "✓ 17 ans d'expertise • RGE Qualibat • Garantie Décennale Couvreur Pro",
+  ];
+  // dupliqué pour défilement seamless
+  const loop = [...messages, ...messages, ...messages, ...messages];
   return (
-    <div className="border-y border-border bg-secondary/50">
-      <div className="mx-auto max-w-7xl px-4 py-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-muted-foreground">
-        {items.map((i) => (
-          <span key={i} className="font-semibold text-primary">{i}</span>
-        ))}
+    <div className="border-y border-border bg-primary text-primary-foreground overflow-hidden">
+      <div className="relative flex">
+        <div className="flex shrink-0 animate-marquee gap-12 py-3 pr-12 whitespace-nowrap text-sm font-semibold">
+          {loop.map((msg, i) => (
+            <span key={i} className="inline-flex items-center gap-3">
+              <span>{msg}</span>
+              <span className="text-accent">★</span>
+            </span>
+          ))}
+        </div>
+        <div aria-hidden="true" className="flex shrink-0 animate-marquee gap-12 py-3 pr-12 whitespace-nowrap text-sm font-semibold">
+          {loop.map((msg, i) => (
+            <span key={`d-${i}`} className="inline-flex items-center gap-3">
+              <span>{msg}</span>
+              <span className="text-accent">★</span>
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -340,12 +360,54 @@ function SocialProof() {
             </figure>
           ))}
         </div>
-        <div className="mt-10 grid sm:grid-cols-2 gap-5">
-          <img src={beforeAfter} alt="Avant / après rénovation toiture" width={1280} height={800} loading="lazy" className="rounded-2xl shadow-card w-full object-cover aspect-[16/10]" />
-          <img src={rooferWork} alt="Couvreur OEKO sur chantier" width={1024} height={1024} loading="lazy" className="rounded-2xl shadow-card w-full object-cover aspect-[16/10]" />
-        </div>
+        <BeforeAfterGallery />
       </div>
     </section>
+  );
+}
+
+/* ---------------- BEFORE / AFTER GALLERY ---------------- */
+function BeforeAfterGallery() {
+  const projects = [
+    { before: rooferWork, after: heroRoof, city: "Melun (77)", type: "Phénix® • Rénovation complète" },
+    { before: beforeAfter, after: phenixHouse, city: "Mantes-la-Jolie (78)", type: "Alskanor® • Réfection couverture" },
+    { before: phenixHouse, after: heroRoof, city: "Évry (91)", type: "Castor® • Isolation + couverture" },
+    { before: heroRoof, after: rooferWork, city: "Fontainebleau (77)", type: "Phénix® • Démoussage & hydrofuge" },
+    { before: rooferWork, after: beforeAfter, city: "Versailles (78)", type: "Maison ossature métallique" },
+    { before: beforeAfter, after: heroRoof, city: "Étampes (91)", type: "Zinguerie & gouttières complètes" },
+  ];
+  return (
+    <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {projects.map((p, i) => (
+        <article key={i} className="group rounded-2xl bg-card ring-1 ring-border shadow-card overflow-hidden hover:-translate-y-1 hover:ring-primary/30 transition">
+          <div className="relative grid grid-cols-2 aspect-[16/10] bg-muted">
+            <div className="relative overflow-hidden">
+              <img src={p.before} alt={`Toiture avant rénovation - ${p.city}`} loading="lazy" className="w-full h-full object-cover grayscale-[35%] brightness-90 group-hover:scale-105 transition duration-500" />
+              <span className="absolute top-2 left-2 rounded-full bg-foreground/85 text-background px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider">Avant</span>
+            </div>
+            <div className="relative overflow-hidden">
+              <img src={p.after} alt={`Toiture après rénovation par OEKO - ${p.city}`} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+              <span className="absolute top-2 right-2 rounded-full bg-accent text-accent-foreground px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider">Après</span>
+            </div>
+            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 w-0.5 bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.15)]" />
+            <div aria-hidden="true" className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-8 rounded-full bg-white grid place-items-center shadow ring-1 ring-border">
+              <ArrowRight className="size-4 text-primary" />
+            </div>
+          </div>
+          <div className="p-4 flex items-center justify-between gap-3">
+            <div>
+              <div className="font-bold text-sm">{p.type}</div>
+              <div className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
+                <MapPin className="size-3.5" /> {p.city}
+              </div>
+            </div>
+            <div className="flex gap-0.5">
+              {[...Array(5)].map((_, j) => <Star key={j} className="size-3.5 fill-accent text-accent" />)}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
   );
 }
 
@@ -688,7 +750,7 @@ function FinalCTA() {
           <a href="#devis" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground px-7 py-4 text-base font-bold shadow-soft hover:brightness-95 transition">
             Obtenir mon devis gratuit <ArrowRight className="size-5" />
           </a>
-          <a href={OEKO_PHONE_HREF} className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 ring-1 ring-white/25 px-7 py-4 text-base font-semibold hover:bg-white/15 transition">
+          <a href={OEKO_PHONE_HREF} target="_top" rel="noopener" className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 ring-1 ring-white/25 px-7 py-4 text-base font-semibold hover:bg-white/15 transition">
             <Phone className="size-5" /> Appeler OEKO
           </a>
         </div>
