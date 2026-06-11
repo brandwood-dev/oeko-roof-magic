@@ -360,12 +360,54 @@ function SocialProof() {
             </figure>
           ))}
         </div>
-        <div className="mt-10 grid sm:grid-cols-2 gap-5">
-          <img src={beforeAfter} alt="Avant / après rénovation toiture" width={1280} height={800} loading="lazy" className="rounded-2xl shadow-card w-full object-cover aspect-[16/10]" />
-          <img src={rooferWork} alt="Couvreur OEKO sur chantier" width={1024} height={1024} loading="lazy" className="rounded-2xl shadow-card w-full object-cover aspect-[16/10]" />
-        </div>
+        <BeforeAfterGallery />
       </div>
     </section>
+  );
+}
+
+/* ---------------- BEFORE / AFTER GALLERY ---------------- */
+function BeforeAfterGallery() {
+  const projects = [
+    { before: rooferWork, after: heroRoof, city: "Melun (77)", type: "Phénix® • Rénovation complète" },
+    { before: beforeAfter, after: phenixHouse, city: "Mantes-la-Jolie (78)", type: "Alskanor® • Réfection couverture" },
+    { before: phenixHouse, after: heroRoof, city: "Évry (91)", type: "Castor® • Isolation + couverture" },
+    { before: heroRoof, after: rooferWork, city: "Fontainebleau (77)", type: "Phénix® • Démoussage & hydrofuge" },
+    { before: rooferWork, after: beforeAfter, city: "Versailles (78)", type: "Maison ossature métallique" },
+    { before: beforeAfter, after: heroRoof, city: "Étampes (91)", type: "Zinguerie & gouttières complètes" },
+  ];
+  return (
+    <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {projects.map((p, i) => (
+        <article key={i} className="group rounded-2xl bg-card ring-1 ring-border shadow-card overflow-hidden hover:-translate-y-1 hover:ring-primary/30 transition">
+          <div className="relative grid grid-cols-2 aspect-[16/10] bg-muted">
+            <div className="relative overflow-hidden">
+              <img src={p.before} alt={`Toiture avant rénovation - ${p.city}`} loading="lazy" className="w-full h-full object-cover grayscale-[35%] brightness-90 group-hover:scale-105 transition duration-500" />
+              <span className="absolute top-2 left-2 rounded-full bg-foreground/85 text-background px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider">Avant</span>
+            </div>
+            <div className="relative overflow-hidden">
+              <img src={p.after} alt={`Toiture après rénovation par OEKO - ${p.city}`} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+              <span className="absolute top-2 right-2 rounded-full bg-accent text-accent-foreground px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider">Après</span>
+            </div>
+            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 w-0.5 bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.15)]" />
+            <div aria-hidden="true" className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-8 rounded-full bg-white grid place-items-center shadow ring-1 ring-border">
+              <ArrowRight className="size-4 text-primary" />
+            </div>
+          </div>
+          <div className="p-4 flex items-center justify-between gap-3">
+            <div>
+              <div className="font-bold text-sm">{p.type}</div>
+              <div className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
+                <MapPin className="size-3.5" /> {p.city}
+              </div>
+            </div>
+            <div className="flex gap-0.5">
+              {[...Array(5)].map((_, j) => <Star key={j} className="size-3.5 fill-accent text-accent" />)}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
   );
 }
 
