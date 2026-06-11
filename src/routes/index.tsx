@@ -372,9 +372,9 @@ function BeforeAfterGallery() {
     { before: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781208680/AV_egoyrj.jpg", after: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781208680/AP_dili7n.jpg", city: "Lardy (91)", type: "Nettoyage, démoussage, hydrofuge" },
     { before: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781210239/AV_baaxi8.jpg", after: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781210239/AP_irdue5.jpg", city: "Claye-Souilly (77)", type: "Isolation / Amélioration énergétique" },
     { before: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781210459/AV_hhh2vz.jpg", after: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781210459/AP_txbuwn.jpg", city: "Rambouillet (78)", type: "Rénovation / Réfection complète" },
-    { before: heroRoof, after: rooferWork, city: "Fontainebleau (77)", type: "Phénix® • Démoussage & hydrofuge" },
-    { before: rooferWork, after: beforeAfter, city: "Versailles (78)", type: "Maison ossature métallique" },
-    { before: beforeAfter, after: heroRoof, city: "Étampes (91)", type: "Zinguerie & gouttières complètes" },
+    { before: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781210867/av_jzhxcz.jpg", after: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781210867/ap_ags7i1.jpg", city: "Tournan-en-Brie (77)", type: "Isolation / Amélioration énergétique" },
+    { before: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781211098/AV_vdzjms.jpg", after: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781211097/AP_zg57w6.jpg", city: "Crosne (91)", type: "Nettoyage, démoussage, hydrofuge" },
+    { before: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781211368/AV_qrrr1a.jpg", after: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781211368/AP_xktbj3.jpg", city: "Crosne (91)", type: "Nettoyage, démoussage, hydrofuge" },
   ];
   return (
     <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
