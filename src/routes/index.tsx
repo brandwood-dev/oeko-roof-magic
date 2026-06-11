@@ -369,7 +369,7 @@ function SocialProof() {
 /* ---------------- BEFORE / AFTER GALLERY ---------------- */
 function BeforeAfterGallery() {
   const projects = [
-    { before: rooferWork, after: heroRoof, city: "Melun (77)", type: "Phénix® • Rénovation complète" },
+    { before: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781208680/AV_egoyrj.jpg", after: "https://res.cloudinary.com/dxkxiy900/image/upload/v1781208680/AP_dili7n.jpg", city: "Lardy (91)", type: "Nettoyage, démoussage, hydrofuge" },
     { before: beforeAfter, after: phenixHouse, city: "Mantes-la-Jolie (78)", type: "Alskanor® • Réfection couverture" },
     { before: phenixHouse, after: heroRoof, city: "Évry (91)", type: "Castor® • Isolation + couverture" },
     { before: heroRoof, after: rooferWork, city: "Fontainebleau (77)", type: "Phénix® • Démoussage & hydrofuge" },
