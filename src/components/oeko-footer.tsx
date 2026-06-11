@@ -1,4 +1,4 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 
 const LOGO = "https://res.cloudinary.com/dxkxiy900/image/upload/v1772626532/ok_tefpqi.png";
 const OEKO_PHONE = "01 89 70 17 27";
@@ -6,41 +6,10 @@ const OEKO_PHONE_HREF = "tel:+33189701727";
 const OEKO_ADDRESS = "16 Bis Bd Chamblain 77000 Melun";
 const OEKO_EMAIL = "contact@oeko.fr";
 
-type SocialIconProps = {
-  name: "facebook" | "instagram" | "linkedin";
-};
-
-function SocialIcon({ name }: SocialIconProps) {
-  if (name === "facebook") {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true" className="size-5 fill-none stroke-current" strokeWidth="1.8">
-        <path d="M14 8h3V4.5A8 8 0 0 0 14.5 4C12 4 10 5.5 10 8.5V11H7v4h3v5h4v-5h3l.5-4H14V8.8c0-.5.2-.8.8-.8H17" />
-      </svg>
-    );
-  }
-
-  if (name === "instagram") {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true" className="size-5 fill-none stroke-current" strokeWidth="1.8">
-        <rect x="3" y="3" width="18" height="18" rx="5" />
-        <circle cx="12" cy="12" r="4" />
-        <circle cx="17.5" cy="6.5" r="1" className="fill-current stroke-none" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="size-5 fill-none stroke-current" strokeWidth="1.8">
-      <rect x="3" y="3" width="18" height="18" rx="2" />
-      <path d="M8 10v7M8 7v.01M12 17v-4a3 3 0 0 1 6 0v4M12 10v7" />
-    </svg>
-  );
-}
-
 const socialLinks = [
-  { name: "facebook" as const, label: "Facebook OEKO", href: "https://www.facebook.com/oeko.idf/" },
-  { name: "instagram" as const, label: "Instagram OEKO", href: "https://www.instagram.com/oeko.idf/" },
-  { name: "linkedin" as const, label: "LinkedIn OEKO", href: "https://www.linkedin.com/company/oeko-fr/" },
+  { Icon: Facebook, label: "Facebook OEKO", href: "https://www.facebook.com/oeko.idf/" },
+  { Icon: Instagram, label: "Instagram OEKO", href: "https://www.instagram.com/oeko.idf/" },
+  { Icon: Linkedin, label: "LinkedIn OEKO", href: "https://www.linkedin.com/company/oeko-fr/" },
 ];
 
 export function OekoFooter() {
@@ -53,16 +22,16 @@ export function OekoFooter() {
             Spécialiste rénovation toiture & couverture pour maisons à ossature métallique. Île-de-France et limitrophes.
           </p>
           <div className="mt-5 flex items-center gap-2">
-            {socialLinks.map((social) => (
+            {socialLinks.map(({ Icon, label, href }) => (
               <a
-                key={social.name}
-                href={social.href}
+                key={label}
+                href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={social.label}
+                aria-label={label}
                 className="grid size-10 place-items-center rounded-full border border-white/20 text-primary-foreground transition hover:border-accent hover:bg-accent hover:text-accent-foreground"
               >
-                <SocialIcon name={social.name} />
+                <Icon className="size-5" strokeWidth={1.6} />
               </a>
             ))}
           </div>
@@ -92,7 +61,7 @@ export function OekoFooter() {
               <span>{OEKO_ADDRESS}</span>
             </li>
             <li>
-              <a href={OEKO_PHONE_HREF} className="flex items-center gap-2 hover:text-accent">
+              <a href={OEKO_PHONE_HREF} target="_top" rel="noopener" className="flex items-center gap-2 hover:text-accent">
                 <Phone className="size-4 shrink-0 text-accent" />
                 <span>{OEKO_PHONE}</span>
               </a>
