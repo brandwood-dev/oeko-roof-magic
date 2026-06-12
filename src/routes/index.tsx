@@ -15,6 +15,7 @@ import beforeAfter from "@/assets/before-after.jpg";
 import phenixHouse from "@/assets/phenix-house.jpg";
 
 const LOGO = "https://res.cloudinary.com/dxkxiy900/image/upload/v1772626532/ok_tefpqi.png";
+const HERO_IMAGE = "https://res.cloudinary.com/dxkxiy900/image/upload/v1781211097/AP_zg57w6.jpg";
 const OEKO_PHONE_HREF = "tel:+33189701727";
 const WEBFLOW_LP_PATH = "/lp/devis-toiture";
 const SECTION_PATHS = {
@@ -139,7 +140,7 @@ function Hero() {
         </div>
         <div className="relative">
           <div className="relative rounded-3xl overflow-hidden shadow-soft ring-1 ring-white/10">
-            <img src={heroRoof} alt="Toiture rénovée par OEKO" width={1536} height={1024} className="w-full h-[280px] md:h-[460px] object-cover" />
+            <img src={HERO_IMAGE} alt="Toiture rénovée par OEKO" width={1536} height={1024} className="w-full h-[280px] md:h-[460px] object-cover" />
           </div>
           <div className="absolute -bottom-5 -left-3 md:-left-6 bg-card text-card-foreground rounded-2xl shadow-card px-4 py-3 flex items-center gap-3">
             <div className="size-10 rounded-full bg-accent grid place-items-center">
