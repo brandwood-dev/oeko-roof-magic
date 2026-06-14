@@ -458,18 +458,8 @@ type FormData = {
 function QuoteForm() {
   return (
     <section id="devis" className="py-10 md:py-14 bg-secondary/40">
-      <div className="mx-auto max-w-3xl px-4">
-        <div className="text-center max-w-2xl mx-auto">
-          <p className="text-sm font-semibold text-primary uppercase tracking-wider">Devis gratuit</p>
-          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">Obtenez votre devis gratuit pour rénovation de toiture</h2>
-          <p className="mt-3 text-muted-foreground">Réponse sous 48h • Sans engagement • 100% gratuit</p>
-        </div>
-        <div className="mt-8">
-          <QuoteFormCard />
-        </div>
-        <p className="mt-4 text-center text-xs text-muted-foreground flex items-center justify-center gap-2">
-          <ShieldCheck className="size-4" /> Vos données sont confidentielles et utilisées uniquement pour votre devis.
-        </p>
+      <div className="mx-auto max-w-xl px-4">
+        <QuoteFormCard />
       </div>
     </section>
   );
