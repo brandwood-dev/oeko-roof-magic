@@ -353,6 +353,7 @@ function SocialProof() {
     { name: "Nadia B.", city: "Évry (91)", text: "Fuite réparée en urgence sous 24h. Diagnostic précis et tarif honnête. Merci OEKO." },
   ];
   return (
+    <>
     <section className="py-10 md:py-14">
       <div className="mx-auto max-w-7xl px-4">
         <div className="max-w-2xl">
