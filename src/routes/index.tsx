@@ -624,6 +624,7 @@ function QuoteFormCard({ compact = false }: { compact?: boolean }) {
                 )}
               </div>
           </>
+          </div>
     </div>
   );
 }
