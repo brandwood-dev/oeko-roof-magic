@@ -72,17 +72,6 @@ export function OekoFooter() {
                 <span>{OEKO_EMAIL}</span>
               </a>
             </li>
-            <li><a href="https://www.oeko.fr/mentions-legales" target="_top" className="hover:text-accent">Mentions légales</a></li>
-            <li><a href="https://www.oeko.fr/politique-de-confidentialite" target="_top" className="hover:text-accent">Politique de confidentialité</a></li>
-            <li>
-              <button
-                type="button"
-                onClick={() => window.dispatchEvent(new Event("oeko:open-cookie-settings"))}
-                className="hover:text-accent"
-              >
-                Gérer mes cookies
-              </button>
-            </li>
           </ul>
         </div>
       </div>
@@ -92,6 +81,21 @@ export function OekoFooter() {
           <span>
             Phénix®, Alskanor® et Castor® sont des marques déposées appartenant à leurs ayants droit respectifs. OEKO est une entreprise indépendante sans lien commercial ni capitalistique avec ces marques.
           </span>
+        </div>
+      </div>
+      <div className="border-t border-white/10">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-3 gap-y-2 px-4 py-4 text-xs">
+          <a href="https://www.oeko.fr/mentions-legales" target="_top" className="hover:text-accent">Mentions légales</a>
+          <span aria-hidden className="text-primary-foreground/40">·</span>
+          <a href="https://www.oeko.fr/politique-de-confidentialite" target="_top" className="hover:text-accent">Politique de confidentialité</a>
+          <span aria-hidden className="text-primary-foreground/40">·</span>
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event("oeko:open-cookie-settings"))}
+            className="hover:text-accent"
+          >
+            Gérer mes cookies
+          </button>
         </div>
       </div>
     </footer>
