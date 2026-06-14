@@ -533,12 +533,21 @@ function QuoteFormCard({ compact = false }: { compact?: boolean }) {
 
   return (
     <div className={`rounded-3xl bg-card text-card-foreground shadow-soft ring-1 ring-border overflow-hidden ${compact ? "" : ""}`}>
-          {compact && (
+          {compact ? (
             <div className="bg-primary text-primary-foreground px-5 py-5 text-center">
               <h3 className="text-lg font-extrabold tracking-tight">Estimez votre rénovation</h3>
               <p className="mt-1 text-xs font-medium text-accent">Devis gratuit en 2 min · sans engagement</p>
               <p className="mt-1 inline-flex items-center gap-1.5 text-[11px] text-primary-foreground/80">
                 <ShieldCheck className="size-3.5" /> Informations sécurisées et confidentielles
+              </p>
+            </div>
+          ) : (
+            <div className="bg-primary text-primary-foreground px-5 py-6 text-center">
+              <p className="text-xs font-semibold text-accent uppercase tracking-wider">Devis gratuit</p>
+              <h3 className="mt-1 text-lg md:text-xl font-extrabold tracking-tight">Obtenez votre devis gratuit pour rénovation de toiture</h3>
+              <p className="mt-1 text-sm font-medium text-primary-foreground/90">Réponse sous 48h • Sans engagement • 100% gratuit</p>
+              <p className="mt-1 inline-flex items-center gap-1.5 text-[11px] text-primary-foreground/70">
+                <ShieldCheck className="size-3.5" /> Vos données sont confidentielles et utilisées uniquement pour votre devis.
               </p>
             </div>
           )}
