@@ -437,7 +437,7 @@ function QuoteForm() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const steps = ["Projet", "Toiture", "Localisation", "Coordonnées"];
+  const steps = ["Projet", "Toiture", "Coordonnées & Localisation"];
   const progress = ((step + 1) / steps.length) * 100;
 
   const projects = [
@@ -456,8 +456,11 @@ function QuoteForm() {
   const canNext = () => {
     if (step === 0) return !!data.project;
     if (step === 1) return !!data.roof;
-    if (step === 2) return !!(data.postal && /^\d{5}$/.test(data.postal) && data.city);
-    if (step === 3) return !!(data.firstName && data.lastName && data.phone && /^[0-9+\s().-]{8,}$/.test(data.phone || ""));
+    if (step === 2) return !!(
+      data.postal && /^\d{5}$/.test(data.postal) && data.city &&
+      data.firstName && data.lastName && data.phone &&
+      /^[0-9+\s().-]{8,}$/.test(data.phone || "")
+    );
     return false;
   };
 
@@ -527,9 +530,12 @@ function QuoteForm() {
                 </StepGrid>
               )}
 
-              {step === 2 && <LocationStep data={data} setData={setData} />}
-
-              {step === 3 && <ContactStep data={data} setData={setData} />}
+              {step === 2 && (
+                <div className="space-y-6">
+                  <LocationStep data={data} setData={setData} />
+                  <ContactStep data={data} setData={setData} />
+                </div>
+              )}
 
               {submitError && (
                 <div className="mt-5 rounded-2xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
