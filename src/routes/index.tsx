@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import {
   ShieldCheck, Award, HardHat, HeartHandshake, Wrench, Sparkles, CloudRain, Home, Loader2,
-  Star, Phone, ArrowRight, CheckCircle2, ChevronDown, MapPin, Clock,
+  Star, Phone, ArrowRight, CheckCircle2, ChevronDown, MapPin, Clock, ArrowUp,
 } from "lucide-react";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
@@ -70,6 +70,7 @@ function Landing() {
       <FinalCTA />
       <OekoFooter />
       <StickyMobileCTA />
+      <BackToTop />
     </div>
   );
 }
@@ -109,7 +110,7 @@ function Hero() {
       <div className="absolute inset-0 opacity-20 [mask-image:radial-gradient(ellipse_at_top_right,black,transparent_60%)]">
         <div className="absolute -top-32 -right-24 size-[480px] rounded-full bg-accent/40 blur-3xl" />
       </div>
-      <div className="relative mx-auto max-w-7xl px-4 pt-10 pb-14 md:pt-20 md:pb-24 grid md:grid-cols-2 gap-10 items-center">
+      <div className="relative mx-auto max-w-7xl px-4 pt-8 pb-10 md:pt-14 md:pb-16 grid md:grid-cols-2 gap-10 items-center">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full bg-white/10 ring-1 ring-white/20 px-3 py-1 text-xs font-medium mb-5">
             <span className="size-2 rounded-full bg-accent" /> 17 ans d'expertise • RGE Qualibat
@@ -145,17 +146,22 @@ function Hero() {
           </div>
         </div>
         <div className="relative">
-          <div className="relative rounded-3xl overflow-hidden shadow-soft ring-1 ring-white/10">
-            <img src={HERO_IMAGE} alt="Toiture rénovée par OEKO" width={1536} height={1024} className="w-full h-[280px] md:h-[460px] object-cover" />
+          {/* Mobile : image hero (inchangé) */}
+          <div className="md:hidden relative rounded-3xl overflow-hidden shadow-soft ring-1 ring-white/10">
+            <img src={HERO_IMAGE} alt="Toiture rénovée par OEKO" width={1536} height={1024} className="w-full h-[280px] object-cover" />
+            <div className="absolute -bottom-5 -left-3 bg-card text-card-foreground rounded-2xl shadow-card px-4 py-3 flex items-center gap-3">
+              <div className="size-10 rounded-full bg-accent grid place-items-center">
+                <ShieldCheck className="size-5 text-primary" />
+              </div>
+              <div className="text-sm">
+                <div className="font-bold">Garantie Décennale</div>
+                <div className="text-muted-foreground text-xs">Travaux assurés & certifiés</div>
+              </div>
+            </div>
           </div>
-          <div className="absolute -bottom-5 -left-3 md:-left-6 bg-card text-card-foreground rounded-2xl shadow-card px-4 py-3 flex items-center gap-3">
-            <div className="size-10 rounded-full bg-accent grid place-items-center">
-              <ShieldCheck className="size-5 text-primary" />
-            </div>
-            <div className="text-sm">
-              <div className="font-bold">Garantie Décennale</div>
-              <div className="text-muted-foreground text-xs">Travaux assurés & certifiés</div>
-            </div>
+          {/* Desktop : formulaire devis intégré dans le hero */}
+          <div id="devis-desktop" className="hidden md:block scroll-mt-24">
+            <QuoteFormCard compact />
           </div>
         </div>
       </div>
@@ -205,7 +211,7 @@ function WhyOeko() {
     { icon: HeartHandshake, title: "Accompagnement complet", desc: "Conseil pédagogique de l'étude au suivi post-chantier." },
   ];
   return (
-    <section className="py-16 md:py-24">
+    <section className="py-10 md:py-14">
       <div className="mx-auto max-w-7xl px-4">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold text-primary uppercase tracking-wider">Pourquoi OEKO</p>
@@ -239,7 +245,7 @@ function Services() {
     { icon: CloudRain, title: "Gouttières & Zinguerie", desc: "Pose, remplacement et entretien des évacuations d'eau pluviale." },
   ];
   return (
-    <section id="prestations" className="py-16 md:py-24 bg-secondary/40">
+    <section id="prestations" className="py-10 md:py-14 bg-secondary/40">
       <div className="mx-auto max-w-7xl px-4">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold text-primary uppercase tracking-wider">Prestations</p>
@@ -267,7 +273,7 @@ function Services() {
 /* ---------------- EXPERTISE ---------------- */
 function Expertise() {
   return (
-    <section id="expertise" className="py-16 md:py-24">
+    <section id="expertise" className="py-10 md:py-14">
       <div className="mx-auto max-w-7xl px-4 grid md:grid-cols-2 gap-10 items-center">
         <div className="relative">
           <img src={phenixHouse} alt="Maison à ossature métallique Phénix rénovée" width={1024} height={1024} loading="lazy" className="rounded-3xl shadow-soft w-full object-cover aspect-[5/4]" />
@@ -319,7 +325,7 @@ function Steps() {
     { n: "04", title: "Réception & garanties", desc: "Contrôle final, remise des garanties décennale et de parfait achèvement." },
   ];
   return (
-    <section id="etapes" className="py-16 md:py-24 bg-primary text-primary-foreground">
+    <section id="etapes" className="py-10 md:py-14 bg-primary text-primary-foreground">
       <div className="mx-auto max-w-7xl px-4">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold text-accent uppercase tracking-wider">Méthode</p>
@@ -347,7 +353,8 @@ function SocialProof() {
     { name: "Nadia B.", city: "Évry (91)", text: "Fuite réparée en urgence sous 24h. Diagnostic précis et tarif honnête. Merci OEKO." },
   ];
   return (
-    <section className="py-16 md:py-24">
+    <>
+    <section className="py-10 md:py-14">
       <div className="mx-auto max-w-7xl px-4">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold text-primary uppercase tracking-wider">Témoignages</p>
@@ -366,6 +373,24 @@ function SocialProof() {
               </figcaption>
             </figure>
           ))}
+        </div>
+      </div>
+    </section>
+      <ProjectsRealises />
+    </>
+  );
+}
+
+function ProjectsRealises() {
+  return (
+    <section className="py-10 md:py-14 bg-secondary/30 border-t border-border">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="max-w-2xl">
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider">Projets Réalisés</p>
+          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">Nos chantiers de toiture en images</h2>
+          <p className="mt-3 text-muted-foreground">
+            Découvrez l'avant/après de nos rénovations en Île-de-France : nettoyage, isolation et réfection complète.
+          </p>
         </div>
         <BeforeAfterGallery />
       </div>
@@ -431,6 +456,26 @@ type FormData = {
 };
 
 function QuoteForm() {
+  return (
+    <section id="devis" className="py-10 md:py-14 bg-secondary/40">
+      <div className="mx-auto max-w-3xl px-4">
+        <div className="text-center max-w-2xl mx-auto">
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider">Devis gratuit</p>
+          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">Obtenez votre devis gratuit pour rénovation de toiture</h2>
+          <p className="mt-3 text-muted-foreground">Réponse sous 48h • Sans engagement • 100% gratuit</p>
+        </div>
+        <div className="mt-8">
+          <QuoteFormCard />
+        </div>
+        <p className="mt-4 text-center text-xs text-muted-foreground flex items-center justify-center gap-2">
+          <ShieldCheck className="size-4" /> Vos données sont confidentielles et utilisées uniquement pour votre devis.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function QuoteFormCard({ compact = false }: { compact?: boolean }) {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [data, setData] = useState<FormData>({});
@@ -497,15 +542,13 @@ function QuoteForm() {
   };
 
   return (
-    <section id="devis" className="py-16 md:py-24 bg-secondary/40">
-      <div className="mx-auto max-w-3xl px-4">
-        <div className="text-center max-w-2xl mx-auto">
-          <p className="text-sm font-semibold text-primary uppercase tracking-wider">Devis gratuit</p>
-          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">Obtenez votre devis gratuit pour rénovation de toiture</h2>
-          <p className="mt-3 text-muted-foreground">Réponse sous 48h • Sans engagement • 100% gratuit</p>
-        </div>
-
-        <div className="mt-8 rounded-3xl bg-card shadow-soft ring-1 ring-border p-5 md:p-8">
+    <div className={`rounded-3xl bg-card text-card-foreground shadow-soft ring-1 ring-border ${compact ? "p-4 md:p-5" : "p-5 md:p-8"}`}>
+          {compact && (
+            <div className="mb-3 text-center">
+              <p className="text-xs font-semibold text-primary uppercase tracking-wider">Devis gratuit en 2 min</p>
+              <h3 className="mt-1 text-lg font-extrabold">Estimez votre rénovation</h3>
+            </div>
+          )}
               <div className="flex items-center justify-between text-xs font-semibold text-muted-foreground mb-2">
                 <span>Étape {step + 1} sur {steps.length} — {steps[step]}</span>
                 <span>{Math.round(progress)}%</span>
@@ -577,12 +620,7 @@ function QuoteForm() {
                 )}
               </div>
           </>
-        </div>
-        <p className="mt-4 text-center text-xs text-muted-foreground flex items-center justify-center gap-2">
-          <ShieldCheck className="size-4" /> Vos données sont confidentielles et utilisées uniquement pour votre devis.
-        </p>
-      </div>
-    </section>
+    </div>
   );
 }
 
@@ -729,7 +767,7 @@ function FAQ() {
     { q: "Puis-je bénéficier d'aides financières ?", a: "Selon les travaux (isolation notamment), vous pouvez prétendre à MaPrimeRénov', CEE, éco-PTZ. Nous vous accompagnons dans les démarches." },
   ];
   return (
-    <section id="faq" className="py-16 md:py-24">
+    <section id="faq" className="py-10 md:py-14">
       <div className="mx-auto max-w-3xl px-4">
         <div className="text-center">
           <p className="text-sm font-semibold text-primary uppercase tracking-wider">FAQ</p>
@@ -751,9 +789,9 @@ function FAQ() {
 /* ---------------- FINAL CTA ---------------- */
 function FinalCTA() {
   return (
-    <section className="py-16 md:py-24 bg-hero-gradient text-primary-foreground">
+    <section className="py-10 md:py-14 bg-hero-gradient text-primary-foreground">
       <div className="mx-auto max-w-5xl px-4 text-center">
-        <h2 className="text-3xl md:text-5xl font-extrabold">Prêt à rénover votre toiture en toute sérénité ?</h2>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-[1.15]">Prêt à rénover votre toiture en toute sérénité ?</h2>
         <p className="mt-4 text-primary-foreground/85 max-w-2xl mx-auto">
           Devis gratuit sous 48h • Spécialiste maisons à ossature métallique • Intervention Île-de-France & limitrophes.
         </p>
@@ -778,5 +816,27 @@ function StickyMobileCTA() {
         Devis gratuit sous 48h <ArrowRight className="size-5" />
       </a>
     </div>
+  );
+}
+
+/* ---------------- BACK TO TOP ---------------- */
+function BackToTop() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > 320);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  if (!show) return null;
+  return (
+    <button
+      type="button"
+      aria-label="Retour en haut"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      className="fixed right-4 bottom-24 md:bottom-6 z-50 size-12 grid place-items-center rounded-full bg-primary text-primary-foreground shadow-soft ring-1 ring-white/10 hover:bg-primary-deep transition"
+    >
+      <ArrowUp className="size-5" />
+    </button>
   );
 }
