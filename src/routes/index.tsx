@@ -587,7 +587,7 @@ function QuoteForm() {
 }
 
 function StepGrid({ children }: { children: React.ReactNode }) {
-  return <div className="grid sm:grid-cols-2 gap-3">{children}</div>;
+  return <div className="flex flex-col gap-3">{children}</div>;
 }
 
 function CardChoice({ active, onClick, img, title }: { active: boolean; onClick: () => void; img?: string; title: string }) {
@@ -595,21 +595,19 @@ function CardChoice({ active, onClick, img, title }: { active: boolean; onClick:
     <button
       type="button"
       onClick={onClick}
-      className={`group relative text-left rounded-2xl ring-1 transition overflow-hidden ${
+      className={`group relative w-full text-left rounded-xl ring-1 transition overflow-hidden flex items-center gap-4 ${
         active ? "ring-2 ring-primary bg-primary/5" : "ring-border bg-card hover:ring-primary/40"
       }`}
     >
       {img && (
-        <div className="h-28 w-full overflow-hidden">
+        <div className="h-16 w-20 shrink-0 overflow-hidden">
           <img src={img} alt="" className="w-full h-full object-cover group-hover:scale-105 transition" loading="lazy" />
         </div>
       )}
-      <div className="p-4 flex items-center justify-between gap-3">
-        <span className="font-semibold text-sm">{title}</span>
-        <span className={`size-5 rounded-full grid place-items-center shrink-0 ${active ? "bg-primary text-primary-foreground" : "border border-border"}`}>
-          {active && <CheckCircle2 className="size-4" />}
-        </span>
-      </div>
+      <span className="flex-1 min-w-0 font-semibold text-sm truncate">{title}</span>
+      <span className={`mr-4 size-5 rounded-full grid place-items-center shrink-0 ${active ? "bg-primary text-primary-foreground" : "border border-border"}`}>
+        {active && <CheckCircle2 className="size-4" />}
+      </span>
     </button>
   );
 }
