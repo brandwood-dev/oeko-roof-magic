@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import {
   ShieldCheck, Award, HardHat, HeartHandshake, Wrench, Sparkles, CloudRain, Home, Loader2,
-  Star, Phone, ArrowRight, CheckCircle2, ChevronDown, MapPin, Clock,
+  Star, Phone, ArrowRight, CheckCircle2, ChevronDown, MapPin, Clock, ArrowUp,
 } from "lucide-react";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
@@ -70,6 +70,7 @@ function Landing() {
       <FinalCTA />
       <OekoFooter />
       <StickyMobileCTA />
+      <BackToTop />
     </div>
   );
 }
