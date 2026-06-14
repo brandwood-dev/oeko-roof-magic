@@ -12,7 +12,7 @@ import { submitQuoteLead } from "@/lib/api/quote-email.functions";
 import heroRoof from "@/assets/hero-roof.jpg";
 import rooferWork from "@/assets/roofer-work.jpg";
 import beforeAfter from "@/assets/before-after.jpg";
-import phenixHouse from "@/assets/phenix-house.jpg";
+const phenixHouse = "https://res.cloudinary.com/dxkxiy900/image/upload/v1781208680/AP_dili7n.jpg";
 
 const LOGO = "https://res.cloudinary.com/dxkxiy900/image/upload/v1772626532/ok_tefpqi.png";
 const HERO_IMAGE = "https://res.cloudinary.com/dxkxiy900/image/upload/v1781211097/AP_zg57w6.jpg";
