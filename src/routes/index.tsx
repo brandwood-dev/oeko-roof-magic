@@ -457,7 +457,7 @@ type FormData = {
 
 function QuoteForm() {
   return (
-    <section id="devis" className="py-10 md:py-14 bg-secondary/40">
+    <section id="devis" className="py-10 md:py-14 bg-secondary/40 md:hidden">
       <div className="mx-auto max-w-3xl px-4">
         <div className="text-center max-w-2xl mx-auto">
           <p className="text-sm font-semibold text-primary uppercase tracking-wider">Devis gratuit</p>
@@ -767,7 +767,7 @@ function FAQ() {
     { q: "Puis-je bénéficier d'aides financières ?", a: "Selon les travaux (isolation notamment), vous pouvez prétendre à MaPrimeRénov', CEE, éco-PTZ. Nous vous accompagnons dans les démarches." },
   ];
   return (
-    <section id="faq" className="py-16 md:py-24">
+    <section id="faq" className="py-10 md:py-14">
       <div className="mx-auto max-w-3xl px-4">
         <div className="text-center">
           <p className="text-sm font-semibold text-primary uppercase tracking-wider">FAQ</p>
@@ -789,9 +789,9 @@ function FAQ() {
 /* ---------------- FINAL CTA ---------------- */
 function FinalCTA() {
   return (
-    <section className="py-16 md:py-24 bg-hero-gradient text-primary-foreground">
+    <section className="py-10 md:py-14 bg-hero-gradient text-primary-foreground">
       <div className="mx-auto max-w-5xl px-4 text-center">
-        <h2 className="text-3xl md:text-5xl font-extrabold">Prêt à rénover votre toiture en toute sérénité ?</h2>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-[1.15]">Prêt à rénover votre toiture en toute sérénité ?</h2>
         <p className="mt-4 text-primary-foreground/85 max-w-2xl mx-auto">
           Devis gratuit sous 48h • Spécialiste maisons à ossature métallique • Intervention Île-de-France & limitrophes.
         </p>
@@ -816,5 +816,27 @@ function StickyMobileCTA() {
         Devis gratuit sous 48h <ArrowRight className="size-5" />
       </a>
     </div>
+  );
+}
+
+/* ---------------- BACK TO TOP ---------------- */
+function BackToTop() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > 320);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  if (!show) return null;
+  return (
+    <button
+      type="button"
+      aria-label="Retour en haut"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      className="fixed right-4 bottom-24 md:bottom-6 z-50 size-12 grid place-items-center rounded-full bg-primary text-primary-foreground shadow-soft ring-1 ring-white/10 hover:bg-primary-deep transition"
+    >
+      <ArrowUp className="size-5" />
+    </button>
   );
 }
