@@ -211,7 +211,7 @@ function WhyOeko() {
     { icon: HeartHandshake, title: "Accompagnement complet", desc: "Conseil pédagogique de l'étude au suivi post-chantier." },
   ];
   return (
-    <section className="py-16 md:py-24">
+    <section className="py-10 md:py-14">
       <div className="mx-auto max-w-7xl px-4">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold text-primary uppercase tracking-wider">Pourquoi OEKO</p>
@@ -245,7 +245,7 @@ function Services() {
     { icon: CloudRain, title: "Gouttières & Zinguerie", desc: "Pose, remplacement et entretien des évacuations d'eau pluviale." },
   ];
   return (
-    <section id="prestations" className="py-16 md:py-24 bg-secondary/40">
+    <section id="prestations" className="py-10 md:py-14 bg-secondary/40">
       <div className="mx-auto max-w-7xl px-4">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold text-primary uppercase tracking-wider">Prestations</p>
@@ -273,7 +273,7 @@ function Services() {
 /* ---------------- EXPERTISE ---------------- */
 function Expertise() {
   return (
-    <section id="expertise" className="py-16 md:py-24">
+    <section id="expertise" className="py-10 md:py-14">
       <div className="mx-auto max-w-7xl px-4 grid md:grid-cols-2 gap-10 items-center">
         <div className="relative">
           <img src={phenixHouse} alt="Maison à ossature métallique Phénix rénovée" width={1024} height={1024} loading="lazy" className="rounded-3xl shadow-soft w-full object-cover aspect-[5/4]" />
@@ -325,7 +325,7 @@ function Steps() {
     { n: "04", title: "Réception & garanties", desc: "Contrôle final, remise des garanties décennale et de parfait achèvement." },
   ];
   return (
-    <section id="etapes" className="py-16 md:py-24 bg-primary text-primary-foreground">
+    <section id="etapes" className="py-10 md:py-14 bg-primary text-primary-foreground">
       <div className="mx-auto max-w-7xl px-4">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold text-accent uppercase tracking-wider">Méthode</p>
@@ -353,7 +353,7 @@ function SocialProof() {
     { name: "Nadia B.", city: "Évry (91)", text: "Fuite réparée en urgence sous 24h. Diagnostic précis et tarif honnête. Merci OEKO." },
   ];
   return (
-    <section className="py-16 md:py-24">
+    <section className="py-10 md:py-14">
       <div className="mx-auto max-w-7xl px-4">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold text-primary uppercase tracking-wider">Témoignages</p>
@@ -372,6 +372,24 @@ function SocialProof() {
               </figcaption>
             </figure>
           ))}
+        </div>
+      </div>
+    </section>
+      <ProjectsRealises />
+    </>
+  );
+}
+
+function ProjectsRealises() {
+  return (
+    <section className="py-10 md:py-14 bg-secondary/30 border-t border-border">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="max-w-2xl">
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider">Projets Réalisés</p>
+          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">Nos chantiers de toiture en images</h2>
+          <p className="mt-3 text-muted-foreground">
+            Découvrez l'avant/après de nos rénovations en Île-de-France : nettoyage, isolation et réfection complète.
+          </p>
         </div>
         <BeforeAfterGallery />
       </div>
