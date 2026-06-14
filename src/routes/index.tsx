@@ -160,7 +160,7 @@ function Hero() {
             </div>
           </div>
           {/* Desktop : formulaire devis intégré dans le hero */}
-          <div className="hidden md:block">
+          <div id="devis-desktop" className="hidden md:block scroll-mt-24">
             <QuoteFormCard compact />
           </div>
         </div>
