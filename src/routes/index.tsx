@@ -457,7 +457,7 @@ type FormData = {
 
 function QuoteForm() {
   return (
-    <section id="devis" className="py-10 md:py-14 bg-secondary/40 md:hidden">
+    <section id="devis" className="py-10 md:py-14 bg-secondary/40">
       <div className="mx-auto max-w-3xl px-4">
         <div className="text-center max-w-2xl mx-auto">
           <p className="text-sm font-semibold text-primary uppercase tracking-wider">Devis gratuit</p>
