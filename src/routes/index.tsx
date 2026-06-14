@@ -437,6 +437,26 @@ type FormData = {
 };
 
 function QuoteForm() {
+  return (
+    <section id="devis" className="py-10 md:py-14 bg-secondary/40">
+      <div className="mx-auto max-w-3xl px-4">
+        <div className="text-center max-w-2xl mx-auto">
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider">Devis gratuit</p>
+          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">Obtenez votre devis gratuit pour rénovation de toiture</h2>
+          <p className="mt-3 text-muted-foreground">Réponse sous 48h • Sans engagement • 100% gratuit</p>
+        </div>
+        <div className="mt-8">
+          <QuoteFormCard />
+        </div>
+        <p className="mt-4 text-center text-xs text-muted-foreground flex items-center justify-center gap-2">
+          <ShieldCheck className="size-4" /> Vos données sont confidentielles et utilisées uniquement pour votre devis.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function QuoteFormCard({ compact = false }: { compact?: boolean }) {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [data, setData] = useState<FormData>({});
@@ -503,15 +523,13 @@ function QuoteForm() {
   };
 
   return (
-    <section id="devis" className="py-16 md:py-24 bg-secondary/40">
-      <div className="mx-auto max-w-3xl px-4">
-        <div className="text-center max-w-2xl mx-auto">
-          <p className="text-sm font-semibold text-primary uppercase tracking-wider">Devis gratuit</p>
-          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">Obtenez votre devis gratuit pour rénovation de toiture</h2>
-          <p className="mt-3 text-muted-foreground">Réponse sous 48h • Sans engagement • 100% gratuit</p>
-        </div>
-
-        <div className="mt-8 rounded-3xl bg-card shadow-soft ring-1 ring-border p-5 md:p-8">
+    <div className={`rounded-3xl bg-card text-card-foreground shadow-soft ring-1 ring-border ${compact ? "p-4 md:p-5" : "p-5 md:p-8"}`}>
+          {compact && (
+            <div className="mb-3 text-center">
+              <p className="text-xs font-semibold text-primary uppercase tracking-wider">Devis gratuit en 2 min</p>
+              <h3 className="mt-1 text-lg font-extrabold">Estimez votre rénovation</h3>
+            </div>
+          )}
               <div className="flex items-center justify-between text-xs font-semibold text-muted-foreground mb-2">
                 <span>Étape {step + 1} sur {steps.length} — {steps[step]}</span>
                 <span>{Math.round(progress)}%</span>
@@ -583,12 +601,7 @@ function QuoteForm() {
                 )}
               </div>
           </>
-        </div>
-        <p className="mt-4 text-center text-xs text-muted-foreground flex items-center justify-center gap-2">
-          <ShieldCheck className="size-4" /> Vos données sont confidentielles et utilisées uniquement pour votre devis.
-        </p>
-      </div>
-    </section>
+    </div>
   );
 }
 
