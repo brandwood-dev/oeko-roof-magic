@@ -160,7 +160,7 @@ function Hero() {
             </div>
           </div>
           {/* Desktop : formulaire devis intégré dans le hero */}
-          <div id="devis-desktop" className="hidden md:block scroll-mt-24">
+          <div id="devis-desktop" className="hidden md:block scroll-mt-24 md:ml-auto w-full max-w-md">
             <QuoteFormCard compact />
           </div>
         </div>
@@ -542,13 +542,17 @@ function QuoteFormCard({ compact = false }: { compact?: boolean }) {
   };
 
   return (
-    <div className={`rounded-3xl bg-card text-card-foreground shadow-soft ring-1 ring-border ${compact ? "p-4 md:p-5" : "p-5 md:p-8"}`}>
+    <div className={`rounded-3xl bg-card text-card-foreground shadow-soft ring-1 ring-border overflow-hidden ${compact ? "" : ""}`}>
           {compact && (
-            <div className="mb-3 text-center">
-              <p className="text-xs font-semibold text-primary uppercase tracking-wider">Devis gratuit en 2 min</p>
-              <h3 className="mt-1 text-lg font-extrabold">Estimez votre rénovation</h3>
+            <div className="bg-primary text-primary-foreground px-5 py-5 text-center">
+              <h3 className="text-lg font-extrabold tracking-tight">Estimez votre rénovation</h3>
+              <p className="mt-1 text-xs font-medium text-accent">Devis gratuit en 2 min · sans engagement</p>
+              <p className="mt-1 inline-flex items-center gap-1.5 text-[11px] text-primary-foreground/80">
+                <ShieldCheck className="size-3.5" /> Informations sécurisées et confidentielles
+              </p>
             </div>
           )}
+          <div className={compact ? "p-4 md:p-5" : "p-5 md:p-8"}>
               <div className="flex items-center justify-between text-xs font-semibold text-muted-foreground mb-2">
                 <span>Étape {step + 1} sur {steps.length} — {steps[step]}</span>
                 <span>{Math.round(progress)}%</span>
