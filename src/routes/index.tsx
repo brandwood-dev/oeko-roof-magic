@@ -532,8 +532,8 @@ function QuoteForm() {
 
               {step === 2 && (
                 <div className="space-y-6">
-                  <LocationStep data={data} setData={setData} />
                   <ContactStep data={data} setData={setData} />
+                  <LocationStep data={data} setData={setData} />
                 </div>
               )}
 
