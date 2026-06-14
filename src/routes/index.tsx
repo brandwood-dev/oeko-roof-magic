@@ -110,7 +110,7 @@ function Hero() {
       <div className="absolute inset-0 opacity-20 [mask-image:radial-gradient(ellipse_at_top_right,black,transparent_60%)]">
         <div className="absolute -top-32 -right-24 size-[480px] rounded-full bg-accent/40 blur-3xl" />
       </div>
-      <div className="relative mx-auto max-w-7xl px-4 pt-10 pb-14 md:pt-20 md:pb-24 grid md:grid-cols-2 gap-10 items-center">
+      <div className="relative mx-auto max-w-7xl px-4 pt-8 pb-10 md:pt-14 md:pb-16 grid md:grid-cols-2 gap-10 items-center">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full bg-white/10 ring-1 ring-white/20 px-3 py-1 text-xs font-medium mb-5">
             <span className="size-2 rounded-full bg-accent" /> 17 ans d'expertise • RGE Qualibat
@@ -146,17 +146,22 @@ function Hero() {
           </div>
         </div>
         <div className="relative">
-          <div className="relative rounded-3xl overflow-hidden shadow-soft ring-1 ring-white/10">
-            <img src={HERO_IMAGE} alt="Toiture rénovée par OEKO" width={1536} height={1024} className="w-full h-[280px] md:h-[460px] object-cover" />
+          {/* Mobile : image hero (inchangé) */}
+          <div className="md:hidden relative rounded-3xl overflow-hidden shadow-soft ring-1 ring-white/10">
+            <img src={HERO_IMAGE} alt="Toiture rénovée par OEKO" width={1536} height={1024} className="w-full h-[280px] object-cover" />
+            <div className="absolute -bottom-5 -left-3 bg-card text-card-foreground rounded-2xl shadow-card px-4 py-3 flex items-center gap-3">
+              <div className="size-10 rounded-full bg-accent grid place-items-center">
+                <ShieldCheck className="size-5 text-primary" />
+              </div>
+              <div className="text-sm">
+                <div className="font-bold">Garantie Décennale</div>
+                <div className="text-muted-foreground text-xs">Travaux assurés & certifiés</div>
+              </div>
+            </div>
           </div>
-          <div className="absolute -bottom-5 -left-3 md:-left-6 bg-card text-card-foreground rounded-2xl shadow-card px-4 py-3 flex items-center gap-3">
-            <div className="size-10 rounded-full bg-accent grid place-items-center">
-              <ShieldCheck className="size-5 text-primary" />
-            </div>
-            <div className="text-sm">
-              <div className="font-bold">Garantie Décennale</div>
-              <div className="text-muted-foreground text-xs">Travaux assurés & certifiés</div>
-            </div>
+          {/* Desktop : formulaire devis intégré dans le hero */}
+          <div className="hidden md:block">
+            <QuoteFormCard compact />
           </div>
         </div>
       </div>
