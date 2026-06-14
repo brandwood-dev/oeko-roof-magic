@@ -88,9 +88,15 @@ function Header() {
           <a href={SECTION_PATHS.etapes} onClick={(event) => navigateToSection(event, "etapes")} className="hover:text-accent">Étapes</a>
           <a href={SECTION_PATHS.faq} onClick={(event) => navigateToSection(event, "faq")} className="hover:text-accent">FAQ</a>
         </div>
-        <a href="#devis" className="inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-4 py-2 text-sm font-semibold hover:brightness-95 transition">
-          <Phone className="size-4" /> <span className="hidden sm:inline">Devis gratuit</span>
-        </a>
+        <div className="flex items-center gap-2">
+          <a href={OEKO_PHONE_HREF} target="_top" rel="noopener" className="inline-flex items-center gap-2 rounded-full bg-white/10 text-primary-foreground ring-1 ring-white/25 px-4 py-2 text-sm font-semibold hover:bg-white/15 transition">
+            <Phone className="size-4" /> <span className="hidden sm:inline">01 89 70 17 27</span>
+          </a>
+          <a href="#devis" className="inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-4 py-2 text-sm font-semibold hover:brightness-95 transition">
+            <span className="hidden sm:inline">Devis gratuit</span>
+            <span className="sm:hidden">Devis</span>
+          </a>
+        </div>
       </div>
     </header>
   );
@@ -108,10 +114,10 @@ function Hero() {
           <div className="inline-flex items-center gap-2 rounded-full bg-white/10 ring-1 ring-white/20 px-3 py-1 text-xs font-medium mb-5">
             <span className="size-2 rounded-full bg-accent" /> 17 ans d'expertise • RGE Qualibat
           </div>
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-[1.05]">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-[1.15]">
             Rénovation de Toiture & Travaux de Couverture en{" "}
             <span className="text-accent">Île-de-France</span>
-            <span className="block text-xl md:text-2xl font-semibold text-primary-foreground/80 mt-3">
+            <span className="block text-base md:text-lg font-semibold text-primary-foreground/80 mt-3">
               Spécialiste Maisons à Ossature Métallique
             </span>
           </h1>
@@ -431,7 +437,7 @@ function QuoteForm() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const steps = ["Projet", "Toiture", "Localisation", "Coordonnées"];
+  const steps = ["Projet", "Toiture", "Coordonnées & Localisation"];
   const progress = ((step + 1) / steps.length) * 100;
 
   const projects = [
@@ -450,8 +456,11 @@ function QuoteForm() {
   const canNext = () => {
     if (step === 0) return !!data.project;
     if (step === 1) return !!data.roof;
-    if (step === 2) return !!(data.postal && /^\d{5}$/.test(data.postal) && data.city);
-    if (step === 3) return !!(data.firstName && data.lastName && data.phone && /^[0-9+\s().-]{8,}$/.test(data.phone || ""));
+    if (step === 2) return !!(
+      data.postal && /^\d{5}$/.test(data.postal) && data.city &&
+      data.firstName && data.lastName && data.phone &&
+      /^[0-9+\s().-]{8,}$/.test(data.phone || "")
+    );
     return false;
   };
 
@@ -521,9 +530,12 @@ function QuoteForm() {
                 </StepGrid>
               )}
 
-              {step === 2 && <LocationStep data={data} setData={setData} />}
-
-              {step === 3 && <ContactStep data={data} setData={setData} />}
+              {step === 2 && (
+                <div className="space-y-6">
+                  <LocationStep data={data} setData={setData} />
+                  <ContactStep data={data} setData={setData} />
+                </div>
+              )}
 
               {submitError && (
                 <div className="mt-5 rounded-2xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
@@ -575,7 +587,7 @@ function QuoteForm() {
 }
 
 function StepGrid({ children }: { children: React.ReactNode }) {
-  return <div className="grid sm:grid-cols-2 gap-3">{children}</div>;
+  return <div className="flex flex-col gap-3">{children}</div>;
 }
 
 function CardChoice({ active, onClick, img, title }: { active: boolean; onClick: () => void; img?: string; title: string }) {
@@ -583,21 +595,19 @@ function CardChoice({ active, onClick, img, title }: { active: boolean; onClick:
     <button
       type="button"
       onClick={onClick}
-      className={`group relative text-left rounded-2xl ring-1 transition overflow-hidden ${
+      className={`group relative w-full text-left rounded-xl ring-1 transition overflow-hidden flex items-center gap-4 ${
         active ? "ring-2 ring-primary bg-primary/5" : "ring-border bg-card hover:ring-primary/40"
       }`}
     >
       {img && (
-        <div className="h-28 w-full overflow-hidden">
+        <div className="h-16 w-20 shrink-0 overflow-hidden">
           <img src={img} alt="" className="w-full h-full object-cover group-hover:scale-105 transition" loading="lazy" />
         </div>
       )}
-      <div className="p-4 flex items-center justify-between gap-3">
-        <span className="font-semibold text-sm">{title}</span>
-        <span className={`size-5 rounded-full grid place-items-center shrink-0 ${active ? "bg-primary text-primary-foreground" : "border border-border"}`}>
-          {active && <CheckCircle2 className="size-4" />}
-        </span>
-      </div>
+      <span className="flex-1 min-w-0 font-semibold text-sm truncate">{title}</span>
+      <span className={`mr-4 size-5 rounded-full grid place-items-center shrink-0 ${active ? "bg-primary text-primary-foreground" : "border border-border"}`}>
+        {active && <CheckCircle2 className="size-4" />}
+      </span>
     </button>
   );
 }
