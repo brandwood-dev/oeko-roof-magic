@@ -105,6 +105,17 @@ function Header() {
 
 /* ---------------- HERO ---------------- */
 function Hero() {
+  const heroSlides = [
+    "https://res.cloudinary.com/dxkxiy900/image/upload/v1781208680/AV_egoyrj.jpg",
+    "https://res.cloudinary.com/dxkxiy900/image/upload/v1781210239/AP_irdue5.jpg",
+    "https://res.cloudinary.com/dxkxiy900/image/upload/v1781210867/av_jzhxcz.jpg",
+    "https://res.cloudinary.com/dxkxiy900/image/upload/v1781211097/AP_zg57w6.jpg",
+  ];
+  const [slide, setSlide] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setSlide((s) => (s + 1) % heroSlides.length), 4000);
+    return () => clearInterval(id);
+  }, [heroSlides.length]);
   return (
     <section id="top" className="relative overflow-hidden bg-hero-gradient text-primary-foreground">
       <div className="absolute inset-0 opacity-20 [mask-image:radial-gradient(ellipse_at_top_right,black,transparent_60%)]">
@@ -159,9 +170,30 @@ function Hero() {
               </div>
             </div>
           </div>
-          {/* Desktop : formulaire devis intégré dans le hero */}
-          <div id="devis-desktop" className="hidden md:block scroll-mt-24 md:ml-auto w-full max-w-md">
-            <QuoteFormCard compact />
+          {/* Desktop : slider auto d'images de chantiers */}
+          <div className="hidden md:block md:ml-auto w-full">
+            <div className="relative rounded-3xl overflow-hidden shadow-soft ring-1 ring-white/10 aspect-[4/3]">
+              {heroSlides.map((src, i) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt={`Chantier OEKO ${i + 1}`}
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === slide ? "opacity-100" : "opacity-0"}`}
+                  loading={i === 0 ? "eager" : "lazy"}
+                />
+              ))}
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                {heroSlides.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    aria-label={`Image ${i + 1}`}
+                    onClick={() => setSlide(i)}
+                    className={`h-2 rounded-full transition-all ${i === slide ? "w-6 bg-accent" : "w-2 bg-white/60"}`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
