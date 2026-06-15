@@ -79,51 +79,51 @@ export function CookieConsent() {
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-[60] border-t border-border bg-white text-foreground shadow-[0_-12px_35px_rgba(26,19,62,0.15)]">
-      <div className="mx-auto max-w-7xl px-4 py-5">
-        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex max-w-3xl items-start gap-4">
-            <div className="grid size-11 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
-              <Cookie className="size-5" />
+      <div className="mx-auto max-w-7xl px-4 py-3">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex max-w-3xl items-start gap-3">
+            <div className="grid size-9 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
+              <Cookie className="size-4" />
             </div>
             <div>
               <div className="flex items-center gap-3">
-                <h2 className="font-bold text-primary">Gestion des cookies</h2>
+                <h2 className="text-sm font-bold text-primary">Gestion des cookies</h2>
                 <button
                   type="button"
                   onClick={() => save(false, false)}
                   aria-label="Continuer avec les cookies nécessaires"
                   className="text-muted-foreground transition hover:text-primary"
                 >
-                  <X className="size-4" />
+                  <X className="size-3.5" />
                 </button>
               </div>
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-0.5 text-xs leading-snug text-muted-foreground">
                 Nous utilisons des cookies pour améliorer votre expérience, personnaliser le contenu et mesurer notre trafic.
               </p>
             </div>
           </div>
 
-          <div className="flex flex-col gap-2 sm:flex-row">
+          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
             <button
               type="button"
               onClick={() => save(true, true)}
-              className="rounded-lg bg-accent px-5 py-3 text-sm font-bold text-accent-foreground transition hover:brightness-95"
+              className="whitespace-nowrap rounded-lg bg-accent px-4 py-2 text-xs font-bold text-accent-foreground transition hover:brightness-95"
             >
               Accepter tous les cookies
             </button>
             <button
               type="button"
               onClick={() => save(false, false)}
-              className="rounded-lg border border-border px-5 py-3 text-sm font-semibold transition hover:bg-secondary"
+              className="whitespace-nowrap rounded-lg border border-border px-4 py-2 text-xs font-semibold transition hover:bg-secondary"
             >
               Refuser tout
             </button>
             <button
               type="button"
               onClick={() => setCustomizing((current) => !current)}
-              className="inline-flex items-center justify-center gap-2 rounded-lg border border-primary px-5 py-3 text-sm font-semibold text-primary transition hover:bg-primary hover:text-primary-foreground"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-primary px-4 py-2 text-xs font-semibold text-primary transition hover:bg-primary hover:text-primary-foreground"
             >
-              <Settings2 className="size-4" /> Personnaliser
+              <Settings2 className="size-3.5" /> Personnaliser
             </button>
           </div>
         </div>
