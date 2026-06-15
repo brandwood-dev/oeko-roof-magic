@@ -105,6 +105,17 @@ function Header() {
 
 /* ---------------- HERO ---------------- */
 function Hero() {
+  const heroSlides = [
+    "https://res.cloudinary.com/dxkxiy900/image/upload/v1781208680/AV_egoyrj.jpg",
+    "https://res.cloudinary.com/dxkxiy900/image/upload/v1781210239/AP_irdue5.jpg",
+    "https://res.cloudinary.com/dxkxiy900/image/upload/v1781210867/av_jzhxcz.jpg",
+    "https://res.cloudinary.com/dxkxiy900/image/upload/v1781211097/AP_zg57w6.jpg",
+  ];
+  const [slide, setSlide] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setSlide((s) => (s + 1) % heroSlides.length), 4000);
+    return () => clearInterval(id);
+  }, [heroSlides.length]);
   return (
     <section id="top" className="relative overflow-hidden bg-hero-gradient text-primary-foreground">
       <div className="absolute inset-0 opacity-20 [mask-image:radial-gradient(ellipse_at_top_right,black,transparent_60%)]">
@@ -159,9 +170,30 @@ function Hero() {
               </div>
             </div>
           </div>
-          {/* Desktop : formulaire devis intégré dans le hero */}
-          <div id="devis-desktop" className="hidden md:block scroll-mt-24 md:ml-auto w-full max-w-md">
-            <QuoteFormCard compact />
+          {/* Desktop : slider auto d'images de chantiers */}
+          <div className="hidden md:block md:ml-auto w-full">
+            <div className="relative rounded-3xl overflow-hidden shadow-soft ring-1 ring-white/10 aspect-[4/3]">
+              {heroSlides.map((src, i) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt={`Chantier OEKO ${i + 1}`}
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === slide ? "opacity-100" : "opacity-0"}`}
+                  loading={i === 0 ? "eager" : "lazy"}
+                />
+              ))}
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                {heroSlides.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    aria-label={`Image ${i + 1}`}
+                    onClick={() => setSlide(i)}
+                    className={`h-2 rounded-full transition-all ${i === slide ? "w-6 bg-accent" : "w-2 bg-white/60"}`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -181,7 +213,7 @@ function TrustStrip() {
   return (
     <div className="border-y border-border bg-primary text-primary-foreground overflow-hidden">
       <div className="relative flex">
-        <div className="flex shrink-0 animate-marquee gap-12 py-3 pr-12 whitespace-nowrap text-sm font-semibold">
+        <div className="flex shrink-0 animate-marquee gap-12 py-3 pr-12 whitespace-nowrap text-base md:text-lg font-semibold">
           {loop.map((msg, i) => (
             <span key={i} className="inline-flex items-center gap-3">
               <span>{msg}</span>
@@ -189,7 +221,7 @@ function TrustStrip() {
             </span>
           ))}
         </div>
-        <div aria-hidden="true" className="flex shrink-0 animate-marquee gap-12 py-3 pr-12 whitespace-nowrap text-sm font-semibold">
+        <div aria-hidden="true" className="flex shrink-0 animate-marquee gap-12 py-3 pr-12 whitespace-nowrap text-base md:text-lg font-semibold">
           {loop.map((msg, i) => (
             <span key={`d-${i}`} className="inline-flex items-center gap-3">
               <span>{msg}</span>
@@ -360,7 +392,23 @@ function SocialProof() {
           <p className="text-sm font-semibold text-primary uppercase tracking-wider">Témoignages</p>
           <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">Ils nous ont confié leur rénovation de toiture</h2>
         </div>
-        <div className="mt-10 grid lg:grid-cols-3 gap-5">
+        {/* Mobile : carousel horizontal scroll-snap */}
+        <div className="mt-10 -mx-4 px-4 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 lg:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {testimonials.map((t) => (
+            <figure key={t.name} className="snap-center shrink-0 w-[85%] sm:w-[60%] rounded-2xl bg-card p-6 shadow-card ring-1 ring-border">
+              <div className="flex gap-1 mb-3">
+                {[...Array(5)].map((_, i) => <Star key={i} className="size-4 fill-accent text-accent" />)}
+              </div>
+              <blockquote className="text-sm leading-relaxed">"{t.text}"</blockquote>
+              <figcaption className="mt-4 text-sm">
+                <div className="font-bold">{t.name}</div>
+                <div className="text-muted-foreground">{t.city}</div>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        {/* Desktop : grille classique */}
+        <div className="mt-10 hidden lg:grid lg:grid-cols-3 gap-5">
           {testimonials.map((t) => (
             <figure key={t.name} className="rounded-2xl bg-card p-6 shadow-card ring-1 ring-border">
               <div className="flex gap-1 mb-3">

@@ -83,7 +83,7 @@ export function OekoFooter() {
           </span>
         </div>
       </div>
-      <div className="border-t border-white/10">
+      <div className="border-t border-white/10 pb-24 md:pb-0">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-3 gap-y-2 px-4 py-4 text-xs">
           <a href="https://www.oeko.fr/mentions-legales" target="_top" className="hover:text-accent">Mentions légales</a>
           <span aria-hidden className="text-primary-foreground/40">·</span>
