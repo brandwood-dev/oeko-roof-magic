@@ -213,7 +213,7 @@ function TrustStrip() {
   return (
     <div className="border-y border-border bg-primary text-primary-foreground overflow-hidden">
       <div className="relative flex">
-        <div className="flex shrink-0 animate-marquee gap-12 py-3 pr-12 whitespace-nowrap text-sm font-semibold">
+        <div className="flex shrink-0 animate-marquee gap-12 py-3 pr-12 whitespace-nowrap text-base md:text-lg font-semibold">
           {loop.map((msg, i) => (
             <span key={i} className="inline-flex items-center gap-3">
               <span>{msg}</span>
@@ -221,7 +221,7 @@ function TrustStrip() {
             </span>
           ))}
         </div>
-        <div aria-hidden="true" className="flex shrink-0 animate-marquee gap-12 py-3 pr-12 whitespace-nowrap text-sm font-semibold">
+        <div aria-hidden="true" className="flex shrink-0 animate-marquee gap-12 py-3 pr-12 whitespace-nowrap text-base md:text-lg font-semibold">
           {loop.map((msg, i) => (
             <span key={`d-${i}`} className="inline-flex items-center gap-3">
               <span>{msg}</span>
@@ -392,7 +392,23 @@ function SocialProof() {
           <p className="text-sm font-semibold text-primary uppercase tracking-wider">Témoignages</p>
           <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">Ils nous ont confié leur rénovation de toiture</h2>
         </div>
-        <div className="mt-10 grid lg:grid-cols-3 gap-5">
+        {/* Mobile : carousel horizontal scroll-snap */}
+        <div className="mt-10 -mx-4 px-4 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 lg:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {testimonials.map((t) => (
+            <figure key={t.name} className="snap-center shrink-0 w-[85%] sm:w-[60%] rounded-2xl bg-card p-6 shadow-card ring-1 ring-border">
+              <div className="flex gap-1 mb-3">
+                {[...Array(5)].map((_, i) => <Star key={i} className="size-4 fill-accent text-accent" />)}
+              </div>
+              <blockquote className="text-sm leading-relaxed">"{t.text}"</blockquote>
+              <figcaption className="mt-4 text-sm">
+                <div className="font-bold">{t.name}</div>
+                <div className="text-muted-foreground">{t.city}</div>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        {/* Desktop : grille classique */}
+        <div className="mt-10 hidden lg:grid lg:grid-cols-3 gap-5">
           {testimonials.map((t) => (
             <figure key={t.name} className="rounded-2xl bg-card p-6 shadow-card ring-1 ring-border">
               <div className="flex gap-1 mb-3">
