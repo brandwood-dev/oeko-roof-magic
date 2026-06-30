@@ -17,12 +17,11 @@ const phenixHouse = "https://res.cloudinary.com/dxkxiy900/image/upload/v17812086
 const LOGO = "https://res.cloudinary.com/dxkxiy900/image/upload/v1772626532/ok_tefpqi.png";
 const HERO_IMAGE = "https://res.cloudinary.com/dxkxiy900/image/upload/v1781211097/AP_zg57w6.jpg";
 const OEKO_PHONE_HREF = "tel:+33189701727";
-const WEBFLOW_LP_PATH = "/lp/devis-toiture";
 const SECTION_PATHS = {
-  prestations: `${WEBFLOW_LP_PATH}/prestations`,
-  expertise: `${WEBFLOW_LP_PATH}/expertise`,
-  etapes: `${WEBFLOW_LP_PATH}/etapes`,
-  faq: `${WEBFLOW_LP_PATH}/faq`,
+  prestations: "#prestations",
+  expertise: "#expertise",
+  etapes: "#etapes",
+  faq: "#faq",
 } as const;
 
 type SectionId = keyof typeof SECTION_PATHS;
@@ -30,14 +29,7 @@ type SectionId = keyof typeof SECTION_PATHS;
 function navigateToSection(event: MouseEvent<HTMLAnchorElement>, section: SectionId) {
   event.preventDefault();
   document.getElementById(section)?.scrollIntoView({ behavior: "smooth", block: "start" });
-
-  const path = SECTION_PATHS[section];
-  if (window.parent && window.parent !== window) {
-    window.parent.postMessage({ type: "oeko:navigate-section", path, section }, "https://www.oeko.fr");
-    return;
-  }
-
-  window.history.pushState({}, "", path);
+  window.history.replaceState({}, "", SECTION_PATHS[section]);
 }
 
 export const Route = createFileRoute("/")({
