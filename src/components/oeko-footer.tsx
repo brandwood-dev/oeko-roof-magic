@@ -98,11 +98,6 @@ export function OekoFooter() {
           </button>
         </div>
       </div>
-      <div className="border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-4 py-3 text-center text-xs text-primary-foreground/60">
-          Designed by <a href="https://www.brandwoodandco.com/" target="_blank" rel="noopener noreferrer" className="hover:text-accent underline underline-offset-2">Brandwood & Co</a>
-        </div>
-      </div>
     </footer>
   );
 }
