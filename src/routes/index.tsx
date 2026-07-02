@@ -197,7 +197,7 @@ function Hero() {
 function TrustStrip() {
   // Marquee animé — 3 variations de messages SEO/dynamiques en boucle infinie
   const messages = [
-    "✓ Spécialiste Rénovation Toiture Phénix®, Alskanor®, Castor® en Île-de-France",
+    "✓ Spécialiste rénovation toiture pour maisons à ossature métallique en Île-de-France",
     "✓ Devis Gratuit sous 48h • Intervention 7j/7 • Sans engagement",
     "✓ 17 ans d'expertise • RGE Qualibat • Garantie Décennale Couvreur Pro",
   ];
