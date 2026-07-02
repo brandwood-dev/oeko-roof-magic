@@ -454,6 +454,11 @@ function ProjectsRealises() {
           </p>
         </div>
         <BeforeAfterGallery />
+        <div className="mt-10 text-center">
+          <a href="#devis" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground px-6 py-3 text-sm font-bold hover:brightness-95 transition">
+            Obtenir mon devis toiture gratuit <ArrowRight className="size-4" />
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -673,7 +678,7 @@ function QuoteFormCard({ compact = false }: { compact?: boolean }) {
                     type="button"
                     disabled={!canNext() || submitting}
                     onClick={handleSubmit}
-                    className="inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-6 py-3 font-bold disabled:opacity-40 hover:brightness-95 transition"
+                    className="inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-4 md:px-6 py-3 font-bold disabled:opacity-40 hover:brightness-95 transition text-xs md:text-sm whitespace-nowrap"
                   >
                     {submitting ? (
                       <>Envoi en cours… <Loader2 className="size-5 animate-spin" /></>
