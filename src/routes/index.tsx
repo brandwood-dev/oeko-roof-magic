@@ -121,10 +121,10 @@ function Hero() {
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-[1.15]">
             Entreprise spécialisée en rénovation de toiture et travaux de couverture en{" "}
             <span className="text-accent">Île-de-France</span>
-            <span className="block text-sm md:text-base font-semibold text-primary-foreground/80 mt-3">
-              Devis gratuit sous <span className="text-accent">48 h</span> • Plus de <span className="text-accent">17 ans</span> d'expérience • Intervention en Île-de-France
-            </span>
           </h1>
+          <p className="mt-3 text-sm md:text-base font-semibold text-primary-foreground/80 whitespace-normal">
+            Devis gratuit sous <span className="text-accent">48 h</span> • Plus de <span className="text-accent">17 ans</span> d'expérience • Intervention en Île-de-France
+          </p>
           <p className="mt-5 text-sm md:text-base text-primary-foreground/85 max-w-xl leading-relaxed">
             OEKO intervient notamment sur des maisons de différentes marques telles que <strong className="text-accent">PHENIX®, Alskanor®</strong> ou <strong className="text-accent">Castor®</strong>, ainsi que sur les <strong className="text-accent">maisons à ossature métallique</strong>. Nos équipes disposent d'une expertise technique adaptée aux spécificités de ces constructions.
           </p>
@@ -152,13 +152,13 @@ function Hero() {
           {/* Mobile : image hero (inchangé) */}
           <div className="md:hidden relative rounded-3xl overflow-hidden shadow-soft ring-1 ring-white/10">
             <img src={HERO_IMAGE} alt="Toiture rénovée par OEKO" width={1536} height={1024} className="w-full h-[280px] object-cover" />
-            <div className="absolute -bottom-5 -left-3 bg-card text-card-foreground rounded-2xl shadow-card px-4 py-3 flex items-center gap-3">
-              <div className="size-10 rounded-full bg-accent grid place-items-center">
-                <ShieldCheck className="size-5 text-primary" />
+            <div className="absolute bottom-3 left-3 bg-card text-card-foreground rounded-xl shadow-card px-3 py-2 flex items-center gap-2 max-w-[calc(100%-1.5rem)]">
+              <div className="size-8 rounded-full bg-accent grid place-items-center shrink-0">
+                <ShieldCheck className="size-4 text-primary" />
               </div>
-              <div className="text-sm">
+              <div className="text-xs leading-tight min-w-0">
                 <div className="font-bold">Garantie Décennale</div>
-                <div className="text-muted-foreground text-xs">Travaux assurés & certifiés</div>
+                <div className="text-muted-foreground text-[10px]">Travaux assurés & certifiés</div>
               </div>
             </div>
           </div>
@@ -230,7 +230,7 @@ function TrustStrip() {
 function WhyOeko() {
   const cards = [
     { icon: Award, title: "17 ans d'expertise", desc: "Spécialisation exclusive sur les maisons à ossature métallique depuis 2008." },
-    { icon: Home, title: "Spécialiste Phénix®, Alskanor®, Castor®", desc: "Maîtrise technique des contraintes spécifiques à ces constructions." },
+    { icon: Home, title: "Intervention sur des maisons de différentes marques telles que PHENIX®, Alskanor® ou Castor®", desc: "Maîtrise technique des contraintes spécifiques à ces constructions." },
     { icon: ShieldCheck, title: "RGE Qualibat + Décennale", desc: "Certifications officielles et garanties intégrales sur tous nos travaux." },
     { icon: HeartHandshake, title: "Accompagnement complet", desc: "Conseil pédagogique de l'étude au suivi post-chantier." },
   ];
@@ -780,15 +780,7 @@ function ContactStep({ data, setData }: { data: FormData; setData: (d: FormData)
         <Field label="Prénom *" value={data.firstName || ""} onChange={(v) => setData({ ...data, firstName: v })} placeholder="Marie" />
         <Field label="Nom *" value={data.lastName || ""} onChange={(v) => setData({ ...data, lastName: v })} placeholder="Dupont" />
       </div>
-      <div className="rounded-2xl bg-primary/5 ring-1 ring-primary/20 p-4">
-        <label className="text-sm font-bold text-primary flex items-center gap-2"><Phone className="size-4" /> Téléphone * <span className="text-xs font-normal text-muted-foreground">(pour vous rappeler rapidement)</span></label>
-        <input
-          type="tel" value={data.phone || ""}
-          onChange={(e) => setData({ ...data, phone: e.target.value })}
-          placeholder="06 12 34 56 78"
-          className="mt-2 w-full rounded-xl border-2 border-primary/30 bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-primary"
-        />
-      </div>
+      <Field label="Téléphone *" type="tel" value={data.phone || ""} onChange={(v) => setData({ ...data, phone: v })} placeholder="06 12 34 56 78" />
       <Field label="Email" type="email" value={data.email || ""} onChange={(v) => setData({ ...data, email: v })} placeholder="marie@email.com" />
     </div>
   );
