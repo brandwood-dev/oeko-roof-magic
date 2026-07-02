@@ -548,9 +548,9 @@ function QuoteFormCard({ compact = false }: { compact?: boolean }) {
     { id: "isolation", title: "Isolation / Amélioration énergétique", img: phenixHouse },
   ];
   const roofs = [
-    { id: "tuiles", title: "Tuiles (terre cuite ou béton)", img: heroRoof },
-    { id: "ardoise", title: "Ardoise", img: beforeAfter },
-    { id: "zinc", title: "Zinc / Métal", img: rooferWork },
+    { id: "tuiles", title: "Tuiles (terre cuite ou béton)", img: "https://res.cloudinary.com/dxkxiy900/image/upload/v1783013081/toiture-tuile-mecanique-m2_hlezdu.jpg" },
+    { id: "ardoise", title: "Ardoise", img: "https://res.cloudinary.com/dxkxiy900/image/upload/v1783013133/toiture-ardoise-084851_fkv8x5.jpg" },
+    { id: "zinc", title: "Zinc / Métal", img: "https://res.cloudinary.com/dxkxiy900/image/upload/v1783013209/service-joint-debout-BIdbnv03_y6lf54.jpg" },
     { id: "autre", title: "Autre / Je ne sais pas", img: phenixHouse },
   ];
 
