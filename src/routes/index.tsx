@@ -1,5 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import {
   ShieldCheck, Award, HardHat, HeartHandshake, Wrench, Sparkles, CloudRain, Home, Loader2,
   Star, Phone, ArrowRight, CheckCircle2, ChevronDown, MapPin, Clock, ArrowUp,
@@ -196,7 +197,7 @@ function Hero() {
 function TrustStrip() {
   // Marquee animé — 3 variations de messages SEO/dynamiques en boucle infinie
   const messages = [
-    "✓ Spécialiste Rénovation Toiture Phénix®, Alskanor®, Castor® en Île-de-France",
+    "✓ Spécialiste rénovation toiture pour maisons à ossature métallique en Île-de-France",
     "✓ Devis Gratuit sous 48h • Intervention 7j/7 • Sans engagement",
     "✓ 17 ans d'expertise • RGE Qualibat • Garantie Décennale Couvreur Pro",
   ];
@@ -382,6 +383,17 @@ function SocialProof() {
     { name: "Laurent V.", city: "Crosne (91)", text: "Démoussage et traitement hydrofuge nickel. Devis rapide, prix juste, résultat au top." },
     { name: "Isabelle T.", city: "Melun (77)", text: "Intervention rapide pour une fuite, diagnostic précis et réparation durable. Je recommande OEKO les yeux fermés." },
   ];
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const id = setInterval(() => {
+      if (!paused) emblaApi.scrollNext();
+    }, 4000);
+    return () => clearInterval(id);
+  }, [emblaApi, paused]);
+
   return (
     <>
     <section className="py-10 md:py-14">
@@ -390,35 +402,38 @@ function SocialProof() {
           <p className="text-sm font-semibold text-primary uppercase tracking-wider">Témoignages</p>
           <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">Ils nous ont confié leur rénovation de toiture</h2>
         </div>
-        {/* Mobile : carousel horizontal scroll-snap */}
-        <div className="mt-10 -mx-4 px-4 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 lg:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {testimonials.map((t) => (
-            <figure key={t.name} className="snap-center shrink-0 w-[85%] sm:w-[60%] rounded-2xl bg-card p-6 shadow-card ring-1 ring-border">
-              <div className="flex gap-1 mb-3">
-                {[...Array(5)].map((_, i) => <Star key={i} className="size-4 fill-accent text-accent" />)}
-              </div>
-              <blockquote className="text-sm leading-relaxed">"{t.text}"</blockquote>
-              <figcaption className="mt-4 text-sm">
-                <div className="font-bold">{t.name}</div>
-                <div className="text-muted-foreground">{t.city}</div>
-              </figcaption>
-            </figure>
-          ))}
+        <div
+          className="mt-10 overflow-hidden"
+          ref={emblaRef}
+          onPointerEnter={() => setPaused(true)}
+          onPointerLeave={() => setPaused(false)}
+        >
+          <div className="flex -ml-4">
+            {testimonials.map((t) => (
+              <figure key={t.name} className="min-w-0 shrink-0 grow-0 basis-full md:basis-1/3 pl-4">
+                <div className="rounded-2xl bg-card p-6 shadow-card ring-1 ring-border h-full">
+                  <div className="flex gap-1 mb-3">
+                    {[...Array(5)].map((_, i) => <Star key={i} className="size-4 fill-accent text-accent" />)}
+                  </div>
+                  <blockquote className="text-sm leading-relaxed">"{t.text}"</blockquote>
+                  <figcaption className="mt-4 text-sm">
+                    <div className="font-bold">{t.name}</div>
+                    <div className="text-muted-foreground">{t.city}</div>
+                  </figcaption>
+                </div>
+              </figure>
+            ))}
+          </div>
         </div>
-        {/* Desktop : grille classique */}
-        <div className="mt-10 hidden lg:grid lg:grid-cols-3 gap-5">
-          {testimonials.map((t) => (
-            <figure key={t.name} className="rounded-2xl bg-card p-6 shadow-card ring-1 ring-border">
-              <div className="flex gap-1 mb-3">
-                {[...Array(5)].map((_, i) => <Star key={i} className="size-4 fill-accent text-accent" />)}
-              </div>
-              <blockquote className="text-sm leading-relaxed">"{t.text}"</blockquote>
-              <figcaption className="mt-4 text-sm">
-                <div className="font-bold">{t.name}</div>
-                <div className="text-muted-foreground">{t.city}</div>
-              </figcaption>
-            </figure>
-          ))}
+        <div className="mt-8 text-center">
+          <a
+            href="https://www.google.fr/maps/place/OEKO+-+Agence+Paris+Est+%E2%80%93+R%C3%A9novation+%C3%89nerg%C3%A9tique+%26+Isolation+%7C+Entreprise+RGE/@48.5339167,2.6540778,17z/data=!4m6!3m5!1s0xffd485c5bc9a537:0xb3e912bab36a8178!8m2!3d48.3858372!4d2.7991666!16s%2Fg%2F11vpy02pqp?entry=ttu&g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 text-sm font-semibold hover:bg-primary-deep transition"
+          >
+            Voir plus d'avis Google <ArrowRight className="size-4" />
+          </a>
         </div>
       </div>
     </section>
@@ -439,6 +454,11 @@ function ProjectsRealises() {
           </p>
         </div>
         <BeforeAfterGallery />
+        <div className="mt-10 text-center">
+          <a href="#devis" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground px-6 py-3 text-sm font-bold hover:brightness-95 transition">
+            Obtenir mon devis toiture gratuit <ArrowRight className="size-4" />
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -658,7 +678,7 @@ function QuoteFormCard({ compact = false }: { compact?: boolean }) {
                     type="button"
                     disabled={!canNext() || submitting}
                     onClick={handleSubmit}
-                    className="inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-6 py-3 font-bold disabled:opacity-40 hover:brightness-95 transition"
+                    className="inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-4 md:px-6 py-3 font-bold disabled:opacity-40 hover:brightness-95 transition text-xs md:text-sm whitespace-nowrap"
                   >
                     {submitting ? (
                       <>Envoi en cours… <Loader2 className="size-5 animate-spin" /></>
