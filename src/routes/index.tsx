@@ -119,14 +119,14 @@ function Hero() {
             <span className="size-2 rounded-full bg-accent" /> 17 ans d'expertise • RGE Qualibat
           </div>
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-[1.15]">
-            Rénovation de Toiture & Travaux de Couverture en{" "}
+            Entreprise spécialisée en rénovation de toiture et travaux de couverture en{" "}
             <span className="text-accent">Île-de-France</span>
-            <span className="block text-base md:text-lg font-semibold text-primary-foreground/80 mt-3">
-              Spécialiste Maisons à Ossature Métallique
+            <span className="block text-sm md:text-base font-semibold text-primary-foreground/80 mt-3">
+              Devis gratuit sous <span className="text-accent">48 h</span> • Plus de <span className="text-accent">17 ans</span> d'expérience • Intervention en Île-de-France
             </span>
           </h1>
-          <p className="mt-5 text-base md:text-lg text-primary-foreground/85 max-w-xl">
-            Expert <strong className="text-accent">Phénix®, Alskanor®, Castor®</strong> • Devis gratuit sous 48h • Intervention dans toute l'Île-de-France (77, 78, 91) et départements limitrophes (45, 60, 27, 28, 89, 10).
+          <p className="mt-5 text-sm md:text-base text-primary-foreground/85 max-w-xl leading-relaxed">
+            OEKO intervient notamment sur des maisons de différentes marques telles que <strong className="text-accent">PHENIX®, Alskanor®</strong> ou <strong className="text-accent">Castor®</strong>, ainsi que sur les <strong className="text-accent">maisons à ossature métallique</strong>. Nos équipes disposent d'une expertise technique adaptée aux spécificités de ces constructions.
           </p>
           <div className="mt-7 flex flex-col sm:flex-row gap-3">
             <a href="#devis" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground px-6 py-4 text-base font-bold shadow-soft hover:brightness-95 transition">
@@ -307,10 +307,10 @@ function Expertise() {
           </div>
         </div>
         <div>
-          <p className="text-sm font-semibold text-primary uppercase tracking-wider">Expertise unique</p>
-          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold">
-            Spécialiste Rénovation Toiture Maisons à Ossature Métallique{" "}
-            <span className="text-primary">Phénix®, Alskanor®, Castor®</span>
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider">Expertise reconnue</p>
+          <h2 className="mt-2 text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight">
+            Expertise reconnue sur les maisons de différentes marques telles que{" "}
+            <span className="text-primary">PHENIX®, Alskanor®</span> ou <span className="text-primary">Castor®</span>, ainsi que sur les <span className="text-primary">maisons à ossature métallique</span>.
           </h2>
           <p className="mt-5 text-muted-foreground">
             Depuis plus de 17 ans, OEKO intervient exclusivement sur les maisons à ossature métallique.
@@ -375,6 +375,12 @@ function SocialProof() {
     { name: "Sophie L.", city: "Melun (77)", text: "Rénovation complète de notre Phénix : équipe pro, chantier propre, résultat impeccable. Je recommande !" },
     { name: "Marc D.", city: "Mantes-la-Jolie (78)", text: "Spécialistes vraiment compétents sur l'ossature métallique. Devis clair, délais tenus." },
     { name: "Nadia B.", city: "Évry (91)", text: "Fuite réparée en urgence sous 24h. Diagnostic précis et tarif honnête. Merci OEKO." },
+    { name: "Julien R.", city: "Lardy (91)", text: "Nettoyage et hydrofuge de notre toiture Alskanor : rendu impeccable, équipe ponctuelle et soigneuse." },
+    { name: "Céline M.", city: "Rambouillet (78)", text: "Réfection complète de la couverture. Conseils clairs, devis transparent et chantier livré dans les délais." },
+    { name: "Antoine P.", city: "Claye-Souilly (77)", text: "Isolation de toiture parfaitement réalisée, vraie différence sur nos factures d'énergie. Merci !" },
+    { name: "Fatima K.", city: "Tournan-en-Brie (77)", text: "Équipe très pro, à l'écoute et respectueuse. Notre maison Phénix a retrouvé une seconde jeunesse." },
+    { name: "Laurent V.", city: "Crosne (91)", text: "Démoussage et traitement hydrofuge nickel. Devis rapide, prix juste, résultat au top." },
+    { name: "Isabelle T.", city: "Melun (77)", text: "Intervention rapide pour une fuite, diagnostic précis et réparation durable. Je recommande OEKO les yeux fermés." },
   ];
   return (
     <>
